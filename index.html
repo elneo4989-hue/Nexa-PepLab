@@ -20,33 +20,30 @@ header{background:white;height:75px;display:flex;align-items:center;justify-cont
 .dropdown-menu div{padding:8px;border-radius:8px;cursor:pointer;}
 .dropdown-menu div:hover{background:#ecfeff;}
 .cart-btn{background:var(--primary);color:white;padding:8px 15px;border-radius:10px;cursor:pointer;}
-.mobile-nav{display:none;align-items:center;gap:10px;}
+.mobile-nav{display:none;align-items:center;gap:10px;justify-content:space-between;padding:0 6%;}
 .hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:50px 6%;align-items:center;}
 .hero img{width:100%;border-radius:18px;}
-.container{padding:20px 6% 60px;}
+.container{padding:20px 6% 120px;} /* extra bottom padding for cart/social buttons */
 .products{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
 .card{background:white;border-radius:18px;padding:18px;box-shadow:0 15px 40px rgba(0,0,0,0.08);cursor:pointer;transition:.25s;}
 .card:hover{transform:translateY(-6px);}
 .card img{width:100%;height:160px;object-fit:cover;border-radius:12px;margin-bottom:10px;}
 .price{color:var(--primary);font-weight:700;}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:2000;}
-.modal-box{background:white;padding:30px;border-radius:18px;max-width:500px;width:100%;}
+.modal,.form-modal,.checkout-modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:2000;}
+.modal-box,.form-box,.checkout-box{background:white;padding:30px;border-radius:18px;max-width:500px;width:100%;box-shadow:0 15px 40px rgba(0,0,0,0.15);}
 .qty{display:flex;gap:10px;margin:15px 0;}
 .qty button{padding:6px 12px;cursor:pointer;}
-.modal-box button{padding:10px 14px;border:none;border-radius:8px;margin-right:10px;background:var(--primary);color:white;cursor:pointer;}
+.modal-box button,.form-box button,.checkout-box button{padding:10px 14px;border:none;border-radius:8px;margin-top:10px;background:var(--primary);color:white;cursor:pointer;}
 .cart{position:fixed;right:-400px;top:0;height:100%;width:380px;background:white;padding:25px;box-shadow:-10px 0 40px rgba(0,0,0,0.2);transition:.35s;display:flex;flex-direction:column;}
 .cart.open{right:0;}
-.social{position:fixed;bottom:18px;right:18px;display:flex;flex-direction:column;gap:12px;}
+.social{position:fixed;bottom:18px;right:18px;display:flex;flex-direction:column;gap:12px;z-index:4000;}
 .social a{width:52px;height:52px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 25px rgba(0,0,0,0.18);}
 .social img{width:26px;}
-.form-modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:3000;}
-.form-box{background:white;padding:30px;border-radius:18px;max-width:400px;width:100%;box-shadow:0 15px 40px rgba(0,0,0,0.1);}
 .form-box h2{text-align:center;margin-bottom:15px;}
 .form-box input{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #ccc;}
-.form-box button{width:100%;padding:12px;margin-top:12px;border:none;border-radius:8px;background:var(--primary);color:white;font-weight:600;cursor:pointer;}
 .form-box .switch{font-size:14px;text-align:center;margin-top:10px;color:#555;cursor:pointer;}
 .form-box .switch span{color:var(--primary);font-weight:600;}
-@media(max-width:1000px){.hero{grid-template-columns:1fr;}.products{grid-template-columns:repeat(2,1fr);}.desktop-nav{display:none;}.mobile-nav{display:flex;}.logo{font-size:20px;}}
+@media(max-width:1000px){.hero{grid-template-columns:1fr;}.products{grid-template-columns:repeat(2,1fr);}.desktop-nav{display:none;}.mobile-nav{display:flex;}.logo{font-size:20px;}.cart{width:80%;right:-100%;}.cart.open{right:0;}}
 </style>
 </head>
 <body>
@@ -71,6 +68,25 @@ header{background:white;height:75px;display:flex;align-items:center;justify-cont
 <div class="nav-item" onclick="openLogin()">Login</div>
 <div class="nav-item" onclick="openRegister()">Register</div>
 </nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav">
+<div class="dropdown">
+<div class="cart-btn">Categories ▾</div>
+<div class="dropdown-menu">
+<div onclick="filterCategory('all')">All Peptides</div>
+<div onclick="filterCategory('Hormonal')">Hormonal</div>
+<div onclick="filterCategory('Neuro')">Neurotransmitter</div>
+<div onclick="filterCategory('Antimicrobial')">Antimicrobial</div>
+<div onclick="filterCategory('Signal')">Signal</div>
+<div onclick="filterCategory('Structural')">Structural</div>
+<div onclick="filterCategory('Therapeutic')">Therapeutic/Synthetic</div>
+<div onclick="filterCategory('Nutritional')">Nutritional/Food</div>
+<div onclick="filterCategory('Research')">Research</div>
+</div>
+</div>
+<div class="cart-btn" onclick="toggleCart()">Cart (<span id="count">0</span>)</div>
+</div>
 </header>
 
 <section class="hero">
@@ -110,7 +126,7 @@ Total: $<span id="total"></span>
 <h2>Your Cart</h2>
 <div id="cartItems"></div>
 Total: $<span id="cartTotal">0</span><br><br>
-<button onclick="checkout()">Checkout</button>
+<button onclick="openCheckout()">Checkout</button>
 </div>
 
 <!-- LOGIN MODAL -->
@@ -138,73 +154,60 @@ Total: $<span id="cartTotal">0</span><br><br>
 </div>
 </div>
 
+<!-- CHECKOUT MODAL -->
+<div class="checkout-modal" id="checkoutModal">
+<div class="checkout-box">
+<h2>Choose Contact Method</h2>
+<p>⚠️ Payment issue! Choose WhatsApp or Telegram</p>
+<button onclick="checkoutOpen('whatsapp')">WhatsApp</button>
+<button onclick="checkoutOpen('telegram')">Telegram</button>
+<button onclick="closeCheckout()">Cancel</button>
+</div>
+</div>
+
+<!-- SOCIAL -->
+<div class="social">
+<a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"></a>
+<a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"></a>
+<a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
+</div>
+
 <script>
-// === PRODUCTS DATA ===
+// PRODUCTS
 const products=[
-{id:1,name:"Semaglutide",cat:"Hormonal",desc:"GLP-1 hormone peptide for blood sugar control and weight loss.",dose:"0.25–1 mg/week",price:299,img:"https://source.unsplash.com/400x300/?medicine"},
+{id:1,name:"Semaglutide",cat:"Hormonal",desc:"GLP-1 hormone peptide.",dose:"0.25–1 mg/week",price:299,img:"https://source.unsplash.com/400x300/?medicine"},
 {id:2,name:"Tirzepatide",cat:"Hormonal",desc:"Advanced GLP-1 therapy.",dose:"5–15 mg/week",price:389,img:"https://source.unsplash.com/400x300/?pharmacy"},
 {id:3,name:"Liraglutide",cat:"Hormonal",desc:"Daily GLP-1 injection.",dose:"0.6–1.8 mg/day",price:279,img:"https://source.unsplash.com/400x300/?drug"},
-{id:4,name:"Ipamorelin",cat:"Therapeutic",desc:"Growth hormone-releasing peptide for muscle growth.",dose:"100–200 mcg/day",price:139,img:"https://source.unsplash.com/400x300/?syringe"},
-{id:5,name:"CJC-1295",cat:"Therapeutic",desc:"Growth hormone releasing hormone analog.",dose:"100–200 mcg/week",price:160,img:"https://source.unsplash.com/400x300/?injection"},
-{id:6,name:"BPC-157",cat:"Research",desc:"Tissue repair and healing peptide.",dose:"250–500 mcg/day",price:90,img:"https://source.unsplash.com/400x300/?lab"},
-{id:7,name:"Melanotan II",cat:"Therapeutic",desc:"Tanning and sexual health peptide.",dose:"0.5–1 mg/week",price:109,img:"https://source.unsplash.com/400x300/?tan"}
+{id:4,name:"Ipamorelin",cat:"Therapeutic",desc:"GH-releasing peptide.",dose:"100–200 mcg/day",price:139,img:"https://source.unsplash.com/400x300/?syringe"},
 ];
 
+// CART & LOGIN
 let cart=JSON.parse(localStorage.getItem("cart")||"[]");
-let selected;
-let qty=1;
+let selected; let qty=1;
 
-// === DISPLAY PRODUCTS ===
-function display(list){
-const box=document.getElementById("products");
-box.innerHTML="";
-list.forEach(p=>{
-box.innerHTML+=`<div class="card" onclick="openDrug(${p.id})">
-<img src="${p.img}">
-<h4>${p.name}</h4>
-<p>${p.desc}</p>
-<div>Dose: ${p.dose}</div>
-<div class="price">$${p.price}</div></div>`;
-});
-}
+// DISPLAY
+function display(list){const box=document.getElementById("products"); box.innerHTML=""; list.forEach(p=>{box.innerHTML+=`<div class="card" onclick="openDrug(${p.id})"><img src="${p.img}"><h4>${p.name}</h4><p>${p.desc}</p><div>Dose: ${p.dose}</div><div class="price">$${p.price}</div></div>`;});}
 display(products);
 
-function filterCategory(cat){ if(cat==="all") display(products); else display(products.filter(p=>p.cat===cat)); }
+function filterCategory(cat){if(cat==="all") display(products); else display(products.filter(p=>p.cat===cat));}
 
-// === MODAL FUNCTIONS ===
-function openDrug(id){
-if(!localStorage.getItem("loggedIn")){openLogin(); return;}
-selected=products.find(p=>p.id===id);
-qty=1;
+// MODAL
+function openDrug(id){if(!localStorage.getItem("loggedIn")){openLogin();return;}
+selected=products.find(p=>p.id===id); qty=1;
 document.getElementById("drugName").innerText=selected.name;
 document.getElementById("drugCat").innerText="Category: "+selected.cat;
 document.getElementById("drugDesc").innerText=selected.desc;
 document.getElementById("drugDose").innerText=selected.dose;
 document.getElementById("drugPrice").innerText=selected.price;
-updateTotal();
-document.getElementById("modal").style.display="flex";
-}
+updateTotal(); document.getElementById("modal").style.display="flex";}
 function closeModal(){document.getElementById("modal").style.display="none";}
 function changeQty(n){qty+=n;if(qty<1) qty=1;document.getElementById("qty").innerText=qty;updateTotal();}
 function updateTotal(){document.getElementById("total").innerText=(selected.price*qty).toFixed(2);}
-
-// === CART FUNCTIONS ===
-function addToCart(){
-const item=cart.find(i=>i.id===selected.id);
-if(item)item.qty+=qty; else cart.push({...selected,qty:qty});
-updateCart(); closeModal(); localStorage.setItem("cart",JSON.stringify(cart));
-}
-function updateCart(){
-let total=0;
-const box=document.getElementById("cartItems");
-box.innerHTML="";
-cart.forEach(i=>{total+=i.price*i.qty; box.innerHTML+=`<div>${i.name} x${i.qty} — $${(i.price*i.qty).toFixed(2)}</div>`;});
-document.getElementById("cartTotal").innerText=total.toFixed(2);
-document.getElementById("count").innerText=cart.length;
-}
+function addToCart(){const item=cart.find(i=>i.id===selected.id); if(item)item.qty+=qty; else cart.push({...selected,qty:qty}); updateCart(); closeModal(); localStorage.setItem("cart",JSON.stringify(cart));}
+function updateCart(){let total=0;const box=document.getElementById("cartItems");box.innerHTML="";cart.forEach(i=>{total+=i.price*i.qty;box.innerHTML+=`<div>${i.name} x${i.qty} — $${(i.price*i.qty).toFixed(2)}</div>`;});document.getElementById("cartTotal").innerText=total.toFixed(2);document.getElementById("count").innerText=cart.length;}
 function toggleCart(){document.getElementById("cart").classList.toggle("open");}
 
-// === LOGIN & REGISTER ===
+// LOGIN/REGISTER
 function openLogin(){document.getElementById("loginModal").style.display="flex";}
 function closeLogin(){document.getElementById("loginModal").style.display="none";}
 function openRegister(){document.getElementById("registerModal").style.display="flex";}
@@ -216,38 +219,23 @@ const email=document.getElementById("regEmail").value;
 const phone=document.getElementById("regPhone").value;
 const referral=document.getElementById("regReferral").value;
 const pass=document.getElementById("regPass").value;
-if(!name||!email||!phone||!pass){alert("Please fill all required fields."); return;}
-fetch("https://formsubmit.co/ajax/jenniferaniston.chatline@gmail.com",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({name,email,phone,referral,password:pass})})
-.then(r=>r.json()).then(()=>{alert("Registered! Please login."); closeRegister(); openLogin();})
-.catch(()=>{alert("Error submitting form.");});
-}
-function loginUser(){
-localStorage.setItem("loggedIn","1");
-alert("Login successful!");
-closeLogin();
+if(!name||!email||!phone||!pass){alert("Please fill all fields");return;}
+fetch("https://formsubmit.co/ajax/youremail@example.com",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({name,email,phone,referral,password:pass})}).then(()=>{alert("Registered! Please login."); closeRegister(); openLogin();}).catch(()=>{alert("Error submitting form");});
 }
 
-// === CHECKOUT ===
-function checkout(){
-if(cart.length===0){alert("Cart empty"); return;}
-if(!localStorage.getItem("loggedIn")){openLogin(); return;}
-let service=prompt("⚠️ Payment issue! Choose contact method:\nType 'WhatsApp' or 'Telegram'").toLowerCase();
-if(service!=="whatsapp"&&service!=="telegram"){alert("Invalid option"); return;}
-let total=0;
-let msg="⚠️ Payment Issue! Please confirm order via "+service+"\nOrder Summary:\n";
-cart.forEach((i,index)=>{msg+=`${index+1}. ${i.name} x${i.qty} — $${(i.price*i.qty).toFixed(2)}\n`; total+=i.price*i.qty;});
-msg+="Total: $"+total.toFixed(2);
-const encoded=encodeURIComponent(msg);
-if(service==="whatsapp"){
-const waNumber="+17077531496"; // CHANGE TO YOUR WHATSAPP NUMBER
-window.open(`https://wa.me/${waNumber}?text=${encoded}`,"_blank");
-}else{
-const tgUsername="@NovaPepLab"; // CHANGE TO YOUR TELEGRAM
-window.open(`https://t.me/${tgUsername}?text=${encoded}`,"_blank");
+function loginUser(){localStorage.setItem("loggedIn","1");alert("Login successful!"); closeLogin();}
+
+// CHECKOUT
+function openCheckout(){if(cart.length===0){alert("Cart empty");return;} document.getElementById("checkoutModal").style.display="flex";}
+function closeCheckout(){document.getElementById("checkoutModal").style.display="none";}
+function checkoutOpen(service){
+let total=0; let msg="⚠️ Payment Issue! Confirm order via "+service+"\nOrder Summary:\n"; cart.forEach((i,index)=>{msg+=`${index+1}. ${i.name} x${i.qty} — $${(i.price*i.qty).toFixed(2)}\n`; total+=i.price*i.qty;}); msg+="Total: $"+total.toFixed(2); const encoded=encodeURIComponent(msg);
+if(service==="whatsapp"){const waNumber="1234567890"; window.open(`https://wa.me/${waNumber}?text=${encoded}`,"_blank");}
+else{const tgUsername="YourTelegramUsername"; window.open(`https://t.me/${tgUsername}?text=${encoded}`,"_blank");}
+closeCheckout();
 }
-}
+
 updateCart();
 </script>
-
 </body>
 </html>
