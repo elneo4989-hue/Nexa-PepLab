@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLPPharma</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--primary:#0ea5a4;
+--bg:#f4f7fb;
+--dark:#0f172a;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter,sans-serif;
+}
+
+body{
+background:var(--bg);
+}
+
+/* pages */
+.page{display:none;}
+.active{display:block;}
+
+/* HEADER */
+header{
+background:white;
+height:70px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 6%;
+box-shadow:0 4px 25px rgba(0,0,0,0.05);
+}
+
+.logo{
+font-weight:800;
+font-size:22px;
+}
+.logo span{color:var(--primary);}
+
+.nav{
+display:flex;
+gap:14px;
+align-items:center;
+}
+
+.cart-btn{
+background:var(--primary);
+color:white;
+padding:8px 14px;
+border-radius:10px;
+cursor:pointer;
+border:none;
+}
+
+/* AUTH LAYOUT (PHARMA STYLE) */
+.auth-wrapper{
+min-height:100vh;
+display:grid;
+grid-template-columns:1fr 1fr;
+background:linear-gradient(120deg,#f4f7fb,#eef7f7);
+}
+
+.auth-left{
+display:flex;
+flex-direction:column;
+justify-content:center;
+padding:70px;
+}
+
+.auth-brand{
+font-size:34px;
+font-weight:800;
+margin-bottom:10px;
+}
+
+.auth-brand span{
+color:var(--primary);
+}
+
+.auth-sub{
+color:#64748b;
+margin-bottom:30px;
+}
+
+.trust-box{
+background:white;
+padding:20px;
+border-radius:16px;
+box-shadow:0 10px 35px rgba(0,0,0,0.07);
+margin-top:20px;
+}
+
+.trust-box div{
+margin-bottom:8px;
+font-size:14px;
+}
+
+.auth-right{
+display:flex;
+align-items:center;
+justify-content:center;
+padding:40px;
+}
+
+.auth-box{
+background:white;
+padding:40px;
+border-radius:18px;
+width:420px;
+box-shadow:0 15px 50px rgba(0,0,0,0.1);
+}
+
+.auth-box h2{
+margin-bottom:18px;
+}
+
+.auth-box input,
+.auth-box select{
+width:100%;
+padding:12px;
+margin-bottom:14px;
+border:1px solid #e2e8f0;
+border-radius:10px;
+font-size:14px;
+}
+
+.auth-box input:focus,
+.auth-box select:focus{
+outline:none;
+border-color:var(--primary);
+}
+
+.auth-box button{
+width:100%;
+padding:12px;
+background:var(--primary);
+border:none;
+color:white;
+border-radius:10px;
+font-weight:600;
+cursor:pointer;
+}
+
+.auth-switch{
+text-align:center;
+margin-top:12px;
+color:var(--primary);
+cursor:pointer;
+font-size:14px;
+}
+
+/* HERO */
+.hero{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+padding:40px 6%;
+align-items:center;
+}
+
+.hero img{
+width:100%;
+border-radius:16px;
+}
+
+/* PRODUCTS */
+.container{
+padding:20px 6% 60px;
+}
+
+.products{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+
+.card{
+background:white;
+border-radius:16px;
+padding:14px;
+box-shadow:0 10px 30px rgba(0,0,0,0.07);
+cursor:pointer;
+transition:.2s;
+}
+
+.card:hover{
+transform:translateY(-6px);
+}
+
+.card img{
+width:100%;
+height:140px;
+object-fit:cover;
+border-radius:10px;
+margin-bottom:8px;
+}
+
+.price{
+color:var(--primary);
+font-weight:700;
+}
+
+/* MODAL */
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.5);
+display:none;
+align-items:center;
+justify-content:center;
+}
+
+.modal-box{
+background:white;
+padding:25px;
+border-radius:14px;
+width:420px;
+}
+
+/* CART */
+.cart{
+position:fixed;
+right:-360px;
+top:0;
+width:340px;
+height:100%;
+background:white;
+box-shadow:-10px 0 30px rgba(0,0,0,0.2);
+padding:20px;
+transition:.3s;
+}
+
+.cart.open{
+right:0;
+}
+
+/* NOTIFICATION */
+.notify{
+position:fixed;
+top:20px;
+right:20px;
+background:white;
+padding:18px;
+border-radius:14px;
+box-shadow:0 10px 35px rgba(0,0,0,0.2);
+display:none;
+width:320px;
+}
+
+.notify-buttons{
+display:flex;
+gap:10px;
+margin-top:10px;
+}
+
+.notify-buttons a{
+flex:1;
+text-align:center;
+padding:8px;
+background:var(--primary);
+color:white;
+border-radius:8px;
+text-decoration:none;
+}
+
+/* MOBILE */
+@media(max-width:1000px){
+.auth-wrapper{
+grid-template-columns:1fr;
+}
+.auth-left{
+display:none;
+}
+.products{
+grid-template-columns:repeat(2,1fr);
+}
+.hero{
+grid-template-columns:1fr;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN PAGE -->
+<div class="page active" id="loginPage">
+
+<div class="auth-wrapper">
+
+<div class="auth-left">
+<div class="auth-brand">GLP<span>Pharma</span></div>
+<div class="auth-sub">
+Secure medical peptide marketplace
+</div>
+
+<div class="trust-box">
+<div>✔ Verified Research Compounds</div>
+<div>✔ Secure Customer Accounts</div>
+<div>✔ Fast Global Shipping</div>
+<div>✔ Trusted Peptide Supplier</div>
+</div>
+</div>
+
+<div class="auth-right">
+<div class="auth-box">
+
+<h2>Member Login</h2>
+
+<input type="email" id="loginEmail" placeholder="Email">
+<input type="password" id="loginPass" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+<div class="auth-switch" onclick="showPage('registerPage')">
+Create Account
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- REGISTER PAGE -->
+<div class="page" id="registerPage">
+
+<div class="auth-wrapper">
+
+<div class="auth-left">
+<div class="auth-brand">GLP<span>Pharma</span></div>
+<div class="auth-sub">
+Create your secure peptide research account
+</div>
+
+<div class="trust-box">
+<div>Secure customer registration</div>
+<div>Private ordering system</div>
+<div>Member exclusive pricing</div>
+</div>
+</div>
+
+<div class="auth-right">
+<div class="auth-box">
+
+<h2>Create Account</h2>
+
+<form
+action="https://formsubmit.co/YOUR_EMAIL"
+method="POST"
+onsubmit="return handleRegister(event)">
+
+<input type="text" id="regName" name="Full Name" placeholder="Full Name" required>
+<input type="email" id="regEmail" name="Email" placeholder="Email Address" required>
+<input type="tel" name="Phone Number" placeholder="Phone Number" required>
+
+<select name="Country" required>
+<option value="">Select Country</option>
+<option>Nigeria</option>
+<option>United States</option>
+<option>United Kingdom</option>
+<option>Germany</option>
+<option>Canada</option>
+<option>Australia</option>
+<option>Other</option>
+</select>
+
+<input type="text" name="Address" placeholder="Shipping Address" required>
+<input type="text" name="Referral Code" placeholder="Referral Code (Optional)">
+
+<input type="password" id="regPass" placeholder="Password" required>
+<input type="password" id="regPass2" placeholder="Confirm Password" required>
+
+<label style="font-size:13px">
+<input type="checkbox" required>
+I agree to research policies and terms
+</label>
+
+<input type="hidden" name="_captcha" value="false">
+
+<button type="submit">Create Account</button>
+
+</form>
+
+<div class="auth-switch" onclick="showPage('loginPage')">
+Back to login
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+
+<!-- STORE -->
+<div class="page" id="storePage">
+
+<header>
+<div class="logo">GLP<span>Pharma</span></div>
+
+<div class="nav">
+<button class="cart-btn" onclick="toggleCart()">
+Cart (<span id="count">0</span>)
+</button>
+<button onclick="logout()">Logout</button>
+</div>
+</header>
+
+<section class="hero">
+<div>
+<h1>Promo Week Peptides</h1>
+<p>Discounted research peptides available this week.</p>
+</div>
+<img src="https://source.unsplash.com/800x600/?pharmacy">
+</section>
+
+<div class="container">
+<div class="products" id="products"></div>
+</div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modal-box">
+<h3 id="drugName"></h3>
+<p id="drugDesc"></p>
+Dose: <span id="drugDose"></span><br><br>
+Price: $<span id="drugPrice"></span>
+
+<div style="margin-top:10px">
+<button onclick="changeQty(-1)">-</button>
+<span id="qty">1</span>
+<button onclick="changeQty(1)">+</button>
+</div>
+
+<br>
+Total: $<span id="total"></span>
+<br><br>
+<button onclick="addToCart()">Add to Cart</button>
+<button onclick="closeModal()">Close</button>
+</div>
+</div>
+
+<!-- CART -->
+<div class="cart" id="cart">
+<h3>Your Cart</h3>
+<div id="cartItems"></div>
+<br>
+Total: $<span id="cartTotal">0</span>
+</div>
+
+<!-- NOTICE -->
+<div class="notify" id="notify">
+<strong>Payment Notice</strong>
+<p>
+⚠️ There is currently an issue with payment. Please contact Customer Service via Telegram or WhatsApp for orders.
+</p>
+<div class="notify-buttons">
+<a href="https://t.me/" target="_blank">Telegram</a>
+<a href="https://wa.me/" target="_blank">WhatsApp</a>
+</div>
+</div>
+
+<script>
+
+/* PAGE SWITCH */
+function showPage(id){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById(id).classList.add("active");
+}
+
+/* REGISTER */
+function handleRegister(){
+const p1=regPass.value;
+const p2=regPass2.value;
+
+if(p1!==p2){
+alert("Passwords do not match");
+return false;
+}
+
+localStorage.setItem("user",JSON.stringify({
+email:regEmail.value,
+pass:p1
+}));
+
+setTimeout(()=>{
+showPage("loginPage");
+},600);
+
+return true;
+}
+
+/* LOGIN */
+function login(){
+const user=JSON.parse(localStorage.getItem("user"));
+if(!user) return alert("Account not found");
+
+if(loginEmail.value===user.email && loginPass.value===user.pass){
+showPage("storePage");
+initStore();
+}else{
+alert("Invalid login");
+}
+}
+
+function logout(){
+showPage("loginPage");
+}
+
+/* PRODUCTS */
+const productsData=[
+{id:1,name:"Semaglutide",dose:"0.25–1mg",price:239,desc:"GLP-1 peptide for weight regulation.",img:"https://source.unsplash.com/400x300/?medicine"},
+{id:2,name:"Tirzepatide",dose:"5–15mg",price:299,desc:"Dual incretin peptide.",img:"https://source.unsplash.com/400x300/?lab"},
+{id:3,name:"CJC-1295",dose:"100mcg",price:119,desc:"Growth hormone peptide.",img:"https://source.unsplash.com/400x300/?science"},
+{id:4,name:"Ipamorelin",dose:"200mcg",price:109,desc:"Muscle growth peptide.",img:"https://source.unsplash.com/400x300/?injection"},
+{id:5,name:"BPC-157",dose:"250mcg",price:69,desc:"Healing peptide.",img:"https://source.unsplash.com/400x300/?research"},
+{id:6,name:"Tesamorelin",dose:"2mg",price:149,desc:"Fat metabolism peptide.",img:"https://source.unsplash.com/400x300/?fitness"},
+{id:7,name:"Melanotan II",dose:"1mg",price:79,desc:"Pigmentation peptide.",img:"https://source.unsplash.com/400x300/?sun"},
+{id:8,name:"Collagen Peptides",dose:"5g",price:35,desc:"Structural peptide.",img:"https://source.unsplash.com/400x300/?collagen"}
+];
+
+let cartData=[];
+let selected;
+let qty=1;
+
+function initStore(){
+display(productsData);
+}
+
+function display(list){
+products.innerHTML="";
+list.forEach(p=>{
+products.innerHTML+=`
+<div class="card" onclick="openDrug(${p.id})">
+<img src="${p.img}">
+<h4>${p.name}</h4>
+<p>${p.desc}</p>
+<div>Dose: ${p.dose}</div>
+<div class="price">$${p.price}</div>
+</div>
+`;
+});
+}
+
+function openDrug(id){
+selected=productsData.find(p=>p.id===id);
+qty=1;
+drugName.innerText=selected.name;
+drugDesc.innerText=selected.desc;
+drugDose.innerText=selected.dose;
+drugPrice.innerText=selected.price;
+updateTotal();
+modal.style.display="flex";
+}
+
+function closeModal(){
+modal.style.display="none";
+}
+
+function changeQty(n){
+qty+=n;
+if(qty<1) qty=1;
+document.getElementById("qty").innerText=qty;
+updateTotal();
+}
+
+function updateTotal(){
+total.innerText=(selected.price*qty).toFixed(2);
+}
+
+function addToCart(){
+showNotification();
+
+const item=cartData.find(i=>i.id===selected.id);
+if(item) item.qty+=qty;
+else cartData.push({...selected,qty});
+
+updateCart();
+closeModal();
+}
+
+function updateCart(){
+let totalPrice=0;
+cartItems.innerHTML="";
+cartData.forEach(i=>{
+totalPrice+=i.price*i.qty;
+cartItems.innerHTML+=`<div>${i.name} x${i.qty}</div>`;
+});
+cartTotal.innerText=totalPrice.toFixed(2);
+count.innerText=cartData.length;
+}
+
+function toggleCart(){
+cart.classList.toggle("open");
+}
+
+function showNotification(){
+notify.style.display="block";
+setTimeout(()=>{
+notify.style.display="none";
+},5000);
+}
+
+</script>
+
+</body>
+</html>
