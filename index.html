@@ -9,48 +9,45 @@
 :root{--primary:#0ea5a4;--dark:#0f172a;--bg:#f4f7fb;}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
 body{background:var(--bg);}
-header{background:white;height:75px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;box-shadow:0 4px 25px rgba(0,0,0,0.06);position:sticky;top:0;z-index:1000;}
-.logo{font-size:24px;font-weight:800;}
+header{background:white;height:65px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;box-shadow:0 4px 25px rgba(0,0,0,0.06);position:sticky;top:0;z-index:1000;}
+.logo{font-size:22px;font-weight:800;}
 .logo span{color:var(--primary);}
-.desktop-nav{display:flex;align-items:center;gap:22px;}
+.desktop-nav{display:flex;align-items:center;gap:18px;font-size:14px;}
 .nav-item{cursor:pointer;font-weight:500;}
 .dropdown{position:relative;}
-.dropdown-menu{position:absolute;top:40px;left:0;background:white;padding:15px;border-radius:12px;box-shadow:0 15px 40px rgba(0,0,0,0.15);display:none;flex-direction:column;gap:10px;min-width:220px;}
+.dropdown-menu{position:absolute;top:35px;left:0;background:white;padding:12px;border-radius:12px;box-shadow:0 15px 40px rgba(0,0,0,0.15);display:none;flex-direction:column;gap:8px;min-width:180px;font-size:14px;}
 .dropdown:hover .dropdown-menu{display:flex;}
-.dropdown-menu div{padding:8px;border-radius:8px;cursor:pointer;}
+.dropdown-menu div{padding:6px;border-radius:8px;cursor:pointer;}
 .dropdown-menu div:hover{background:#ecfeff;}
-.cart-btn{background:var(--primary);color:white;padding:8px 15px;border-radius:10px;cursor:pointer;}
-.mobile-nav{display:none;align-items:center;gap:10px;justify-content:space-between;padding:0 6%;}
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:50px 6%;align-items:center;}
+.cart-btn{background:var(--primary);color:white;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px;}
+.mobile-nav{display:none;align-items:center;gap:6px;justify-content:space-between;padding:0 5%;font-size:12px;}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:40px 5%;align-items:center;}
 .hero img{width:100%;border-radius:18px;}
-.container{padding:20px 6% 120px;} /* extra bottom padding for cart/social buttons */
-.products{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
-.card{background:white;border-radius:18px;padding:18px;box-shadow:0 15px 40px rgba(0,0,0,0.08);cursor:pointer;transition:.25s;}
-.card:hover{transform:translateY(-6px);}
-.card img{width:100%;height:160px;object-fit:cover;border-radius:12px;margin-bottom:10px;}
-.price{color:var(--primary);font-weight:700;}
+.container{padding:20px 5% 120px;}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.card{background:white;border-radius:15px;padding:15px;box-shadow:0 15px 40px rgba(0,0,0,0.08);cursor:pointer;transition:.25s;font-size:14px;}
+.card:hover{transform:translateY(-5px);}
+.card img{width:100%;height:140px;object-fit:cover;border-radius:12px;margin-bottom:8px;}
+.price{color:var(--primary);font-weight:700;font-size:14px;}
 .modal,.form-modal,.checkout-modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:2000;}
-.modal-box,.form-box,.checkout-box{background:white;padding:30px;border-radius:18px;max-width:500px;width:100%;box-shadow:0 15px 40px rgba(0,0,0,0.15);}
-.qty{display:flex;gap:10px;margin:15px 0;}
-.qty button{padding:6px 12px;cursor:pointer;}
-.modal-box button,.form-box button,.checkout-box button{padding:10px 14px;border:none;border-radius:8px;margin-top:10px;background:var(--primary);color:white;cursor:pointer;}
-.cart{position:fixed;right:-400px;top:0;height:100%;width:380px;background:white;padding:25px;box-shadow:-10px 0 40px rgba(0,0,0,0.2);transition:.35s;display:flex;flex-direction:column;}
+.modal-box,.form-box,.checkout-box{background:white;padding:25px;border-radius:15px;max-width:450px;width:100%;box-shadow:0 15px 40px rgba(0,0,0,0.15);}
+.qty{display:flex;gap:10px;margin:12px 0;}
+.qty button{padding:5px 10px;cursor:pointer;}
+.modal-box button,.form-box button,.checkout-box button{padding:8px 12px;border:none;border-radius:8px;margin-top:8px;background:var(--primary);color:white;cursor:pointer;font-size:13px;}
+.cart{position:fixed;right:-350px;top:0;height:100%;width:320px;background:white;padding:20px;box-shadow:-10px 0 40px rgba(0,0,0,0.2);transition:.35s;display:flex;flex-direction:column;font-size:14px;}
 .cart.open{right:0;}
-.social{position:fixed;bottom:18px;right:18px;display:flex;flex-direction:column;gap:12px;z-index:4000;}
-.social a{width:52px;height:52px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 25px rgba(0,0,0,0.18);}
-.social img{width:26px;}
-.form-box h2{text-align:center;margin-bottom:15px;}
-.form-box input{width:100%;padding:10px;margin:8px 0;border-radius:8px;border:1px solid #ccc;}
-.form-box .switch{font-size:14px;text-align:center;margin-top:10px;color:#555;cursor:pointer;}
-.form-box .switch span{color:var(--primary);font-weight:600;}
-@media(max-width:1000px){.hero{grid-template-columns:1fr;}.products{grid-template-columns:repeat(2,1fr);}.desktop-nav{display:none;}.mobile-nav{display:flex;}.logo{font-size:20px;}.cart{width:80%;right:-100%;}.cart.open{right:0;}}
+.social{position:fixed;bottom:18px;right:18px;display:flex;flex-direction:column;gap:10px;z-index:4000;}
+.social a{width:46px;height:46px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.18);}
+.social img{width:24px;}
+@media(max-width:1000px){.hero{grid-template-columns:1fr;}.products{grid-template-columns:repeat(2,1fr);}.desktop-nav{display:none;}.mobile-nav{display:flex;}.cart{width:80%;}.cart-btn{padding:5px 10px;font-size:12px;}}
 </style>
 </head>
 <body>
 
 <header>
 <div class="logo">GLP<span>Pharma</span></div>
-<nav class="desktop-nav">
+<div class="desktop-nav">
+<div id="userNameDisplay" class="nav-item"></div>
 <div class="dropdown nav-item">Categories ▾
 <div class="dropdown-menu">
 <div onclick="filterCategory('all')">All Peptides</div>
@@ -65,12 +62,12 @@ header{background:white;height:75px;display:flex;align-items:center;justify-cont
 </div>
 </div>
 <div class="cart-btn" onclick="toggleCart()">Cart (<span id="count">0</span>)</div>
-<div class="nav-item" onclick="openLogin()">Login</div>
 <div class="nav-item" onclick="openRegister()">Register</div>
-</nav>
+</div>
 
-<!-- MOBILE NAV -->
+<!-- MOBILE -->
 <div class="mobile-nav">
+<div id="userNameMobile" style="font-size:12px;"></div>
 <div class="dropdown">
 <div class="cart-btn">Categories ▾</div>
 <div class="dropdown-menu">
@@ -129,17 +126,6 @@ Total: $<span id="cartTotal">0</span><br><br>
 <button onclick="openCheckout()">Checkout</button>
 </div>
 
-<!-- LOGIN MODAL -->
-<div class="form-modal" id="loginModal">
-<div class="form-box">
-<h2>Login</h2>
-<input type="email" id="loginEmail" placeholder="Email" required>
-<input type="password" id="loginPass" placeholder="Password" required>
-<button onclick="loginUser()">Login</button>
-<div class="switch">No account? <span onclick="openRegister()">Register</span></div>
-</div>
-</div>
-
 <!-- REGISTER MODAL -->
 <div class="form-modal" id="registerModal">
 <div class="form-box">
@@ -148,9 +134,7 @@ Total: $<span id="cartTotal">0</span><br><br>
 <input type="email" id="regEmail" placeholder="Email" required>
 <input type="tel" id="regPhone" placeholder="Phone Number" required>
 <input type="text" id="regReferral" placeholder="Referral Code (optional)">
-<input type="password" id="regPass" placeholder="Password" required>
 <button onclick="registerUser()">Register</button>
-<div class="switch">Already have an account? <span onclick="openLogin()">Login</span></div>
 </div>
 </div>
 
@@ -181,18 +165,19 @@ const products=[
 {id:4,name:"Ipamorelin",cat:"Therapeutic",desc:"GH-releasing peptide.",dose:"100–200 mcg/day",price:139,img:"https://source.unsplash.com/400x300/?syringe"},
 ];
 
-// CART & LOGIN
-let cart=JSON.parse(localStorage.getItem("cart")||"[]");
+// CART
+let cart = JSON.parse(localStorage.getItem("cart")||"[]");
 let selected; let qty=1;
 
-// DISPLAY
+// DISPLAY PRODUCTS
 function display(list){const box=document.getElementById("products"); box.innerHTML=""; list.forEach(p=>{box.innerHTML+=`<div class="card" onclick="openDrug(${p.id})"><img src="${p.img}"><h4>${p.name}</h4><p>${p.desc}</p><div>Dose: ${p.dose}</div><div class="price">$${p.price}</div></div>`;});}
 display(products);
 
+// FILTER
 function filterCategory(cat){if(cat==="all") display(products); else display(products.filter(p=>p.cat===cat));}
 
 // MODAL
-function openDrug(id){if(!localStorage.getItem("loggedIn")){openLogin();return;}
+function openDrug(id){if(!localStorage.getItem("userName")){openRegister();return;}
 selected=products.find(p=>p.id===id); qty=1;
 document.getElementById("drugName").innerText=selected.name;
 document.getElementById("drugCat").innerText="Category: "+selected.cat;
@@ -204,37 +189,50 @@ function closeModal(){document.getElementById("modal").style.display="none";}
 function changeQty(n){qty+=n;if(qty<1) qty=1;document.getElementById("qty").innerText=qty;updateTotal();}
 function updateTotal(){document.getElementById("total").innerText=(selected.price*qty).toFixed(2);}
 function addToCart(){const item=cart.find(i=>i.id===selected.id); if(item)item.qty+=qty; else cart.push({...selected,qty:qty}); updateCart(); closeModal(); localStorage.setItem("cart",JSON.stringify(cart));}
-function updateCart(){let total=0;const box=document.getElementById("cartItems");box.innerHTML="";cart.forEach(i=>{total+=i.price*i.qty;box.innerHTML+=`<div>${i.name} x${i.qty} — $${(i.price*i.qty).toFixed(2)}</div>`;});document.getElementById("cartTotal").innerText=total.toFixed(2);document.getElementById("count").innerText=cart.length;}
+
+// UPDATE CART
+function updateCart(){let total=0; const box=document.getElementById("cartItems"); box.innerHTML=""; cart.forEach(i=>{total+=i.price*i.qty; box.innerHTML+=`<div>${i.name} x${i.qty} — $${(i.price*i.qty).toFixed(2)}</div>`;}); document.getElementById("cartTotal").innerText=total.toFixed(2); document.getElementById("count").innerText=cart.length;}
+
+// TOGGLE CART
 function toggleCart(){document.getElementById("cart").classList.toggle("open");}
 
-// LOGIN/REGISTER
-function openLogin(){document.getElementById("loginModal").style.display="flex";}
-function closeLogin(){document.getElementById("loginModal").style.display="none";}
+// REGISTER
 function openRegister(){document.getElementById("registerModal").style.display="flex";}
 function closeRegister(){document.getElementById("registerModal").style.display="none";}
-
 function registerUser(){
 const name=document.getElementById("regName").value;
 const email=document.getElementById("regEmail").value;
 const phone=document.getElementById("regPhone").value;
 const referral=document.getElementById("regReferral").value;
-const pass=document.getElementById("regPass").value;
-if(!name||!email||!phone||!pass){alert("Please fill all fields");return;}
-fetch("https://formsubmit.co/ajax/youremail@example.com",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({name,email,phone,referral,password:pass})}).then(()=>{alert("Registered! Please login."); closeRegister(); openLogin();}).catch(()=>{alert("Error submitting form");});
+if(!name||!email||!phone){alert("Please fill all required fields"); return;}
+localStorage.setItem("userName",name);
+localStorage.setItem("userEmail",email);
+localStorage.setItem("userPhone",phone);
+localStorage.setItem("userReferral",referral);
+document.getElementById("userNameDisplay").innerText="Hi, "+name;
+document.getElementById("userNameMobile").innerText="Hi, "+name;
+alert("Registered successfully!");
+closeRegister();
 }
 
-function loginUser(){localStorage.setItem("loggedIn","1");alert("Login successful!"); closeLogin();}
+// SHOW USER NAME ON LOAD
+if(localStorage.getItem("userName")){
+document.getElementById("userNameDisplay").innerText="Hi, "+localStorage.getItem("userName");
+document.getElementById("userNameMobile").innerText="Hi, "+localStorage.getItem("userName");
+}
 
 // CHECKOUT
-function openCheckout(){if(cart.length===0){alert("Cart empty");return;} document.getElementById("checkoutModal").style.display="flex";}
+function openCheckout(){if(cart.length===0){alert("Cart empty"); return;} document.getElementById("checkoutModal").style.display="flex";}
 function closeCheckout(){document.getElementById("checkoutModal").style.display="none";}
 function checkoutOpen(service){
-let total=0; let msg="⚠️ Payment Issue! Confirm order via "+service+"\nOrder Summary:\n"; cart.forEach((i,index)=>{msg+=`${index+1}. ${i.name} x${i.qty} — $${(i.price*i.qty).toFixed(2)}\n`; total+=i.price*i.qty;}); msg+="Total: $"+total.toFixed(2); const encoded=encodeURIComponent(msg);
+let total=0; let msg="⚠️ Payment Issue! Confirm order via "+service+"\nOrder Summary:\n"; cart.forEach((i,index)=>{msg+=`${index+1}. ${i.name} x${i.qty} — $${(i.price*i.qty).toFixed(2)}\n`; total+=i.price*i.qty;}); msg+="Total: $"+total.toFixed(2);
+const encoded=encodeURIComponent(msg);
 if(service==="whatsapp"){const waNumber="1234567890"; window.open(`https://wa.me/${waNumber}?text=${encoded}`,"_blank");}
 else{const tgUsername="YourTelegramUsername"; window.open(`https://t.me/${tgUsername}?text=${encoded}`,"_blank");}
 closeCheckout();
 }
 
+// INIT
 updateCart();
 </script>
 </body>
