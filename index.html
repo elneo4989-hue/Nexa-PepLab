@@ -3,82 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GLPPharma - Peptides Promo Week</title>
+<title>Nexa Peplab - Peptides Promo Week</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
 :root{--primary:#0ea5a4;--bg:#f4f7fb;}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
 body{background:var(--bg);}
+
 header{background:white;height:65px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;box-shadow:0 4px 25px rgba(0,0,0,0.06);position:sticky;top:0;z-index:1000;}
 .logo{font-size:22px;font-weight:800;}
 .logo span{color:var(--primary);}
+
 .desktop-nav{display:flex;align-items:center;gap:18px;font-size:14px;}
 .nav-item{cursor:pointer;font-weight:500;}
+
 .dropdown{position:relative;}
 .dropdown-menu{position:absolute;top:35px;left:0;background:white;padding:12px;border-radius:12px;box-shadow:0 15px 40px rgba(0,0,0,0.15);display:none;flex-direction:column;gap:8px;min-width:180px;font-size:14px;}
 .dropdown:hover .dropdown-menu{display:flex;}
 .dropdown-menu div{padding:6px;border-radius:8px;cursor:pointer;}
 .dropdown-menu div:hover{background:#ecfeff;}
-.cart-btn{background:var(--primary);color:white;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px;}
+
 .mobile-nav{display:none;align-items:center;gap:6px;justify-content:space-between;padding:0 5%;font-size:12px;}
+.cart-btn{background:var(--primary);color:white;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px;}
+
 .hero{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:40px 5%;align-items:center;}
 .hero img{width:100%;border-radius:18px;}
+
 .container{padding:20px 5% 120px;}
 .products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.section-title{font-size:22px;font-weight:700;margin:20px 0 10px;}
+
 .card{background:white;border-radius:15px;padding:15px;box-shadow:0 15px 40px rgba(0,0,0,0.08);cursor:pointer;transition:.25s;font-size:14px;}
 .card:hover{transform:translateY(-5px);}
 .card img{width:100%;height:140px;object-fit:cover;border-radius:12px;margin-bottom:8px;}
 .price{color:var(--primary);font-weight:700;font-size:14px;}
 
-/* MODALS */
-.modal,.register-modal,.contact-modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:2000;}
-.modal-box,.register-box,.contact-box{background:white;padding:25px;border-radius:15px;max-width:400px;width:100%;box-shadow:0 15px 40px rgba(0,0,0,0.15);}
-.register-box input{width:100%;padding:8px;margin:6px 0;border-radius:8px;border:1px solid #ccc;font-size:14px;}
-.register-box button,.contact-box button{padding:8px 12px;border:none;border-radius:8px;margin-top:8px;background:var(--primary);color:white;cursor:pointer;font-size:14px;}
-.social{position:fixed;bottom:18px;right:18px;display:flex;flex-direction:column;gap:10px;z-index:4000;}
-.social a{width:46px;height:46px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.18);}
+.product-modal,.register-modal,.contact-modal{
+position:fixed;inset:0;background:rgba(0,0,0,0.5);
+display:none;align-items:center;justify-content:center;z-index:2000;
+}
+
+.product-box,.register-box,.contact-box{
+background:white;padding:25px;border-radius:15px;
+max-width:520px;width:100%;box-shadow:0 15px 40px rgba(0,0,0,0.15);
+}
+
+.product-box img{
+width:100%;height:220px;object-fit:cover;border-radius:12px;margin-bottom:10px;
+}
+
+.register-box input{
+width:100%;padding:8px;margin:6px 0;border-radius:8px;border:1px solid #ccc;
+}
+
+button{
+padding:8px 12px;border:none;border-radius:8px;margin-top:8px;
+background:var(--primary);color:white;cursor:pointer;
+}
+
+/* SOCIAL BUTTONS */
+.social{
+position:fixed;bottom:18px;right:18px;
+display:flex;flex-direction:column;gap:10px;z-index:4000;
+}
+.social a{
+width:46px;height:46px;border-radius:50%;background:white;
+display:flex;align-items:center;justify-content:center;
+box-shadow:0 8px 20px rgba(0,0,0,0.18);
+}
 .social img{width:24px;}
-@media(max-width:1000px){.hero{grid-template-columns:1fr;}.products{grid-template-columns:repeat(2,1fr);}.desktop-nav{display:none;}.mobile-nav{display:flex;}.cart-btn{padding:5px 10px;font-size:12px;}}
+
+/* TESTIMONIAL POPUP */
+.testimonial{
+position:fixed;
+bottom:90px;
+left:18px;
+background:white;
+padding:12px 14px;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+font-size:13px;
+max-width:240px;
+display:none;
+animation:fadeIn 0.4s ease;
+z-index:4000;
+}
+
+.testimonial strong{
+display:block;
+font-weight:600;
+margin-bottom:3px;
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translateY(10px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+@media(max-width:1000px){
+.hero{grid-template-columns:1fr;}
+.products{grid-template-columns:repeat(2,1fr);}
+.desktop-nav{display:none;}
+.mobile-nav{display:flex;}
+}
 </style>
 </head>
+
 <body>
 
 <header>
-<div class="logo">GLP<span>Pharma</span></div>
+<div class="logo">Nexa <span>Peplab</span></div>
+
 <div class="desktop-nav">
 <div id="userNameDisplay" class="nav-item"></div>
+
 <div class="dropdown nav-item">Categories ▾
 <div class="dropdown-menu">
 <div onclick="filterCategory('all')">All Peptides</div>
-<div onclick="filterCategory('Hormonal')">Hormonal</div>
-<div onclick="filterCategory('Neuro')">Neurotransmitter</div>
-<div onclick="filterCategory('Antimicrobial')">Antimicrobial</div>
-<div onclick="filterCategory('Signal')">Signal</div>
-<div onclick="filterCategory('Structural')">Structural</div>
-<div onclick="filterCategory('Therapeutic')">Therapeutic/Synthetic</div>
-<div onclick="filterCategory('Nutritional')">Nutritional/Food</div>
+<div onclick="filterCategory('GLP1')">GLP-1 / Metabolic</div>
+<div onclick="filterCategory('FatLoss')">Fat Loss</div>
+<div onclick="filterCategory('Healing')">Healing</div>
+<div onclick="filterCategory('GH')">Growth Hormone</div>
 <div onclick="filterCategory('Research')">Research</div>
 </div>
 </div>
+
 <div class="nav-item" onclick="openRegister()">Register</div>
 </div>
 
 <div class="mobile-nav">
-<div id="userNameMobile" style="font-size:12px;"></div>
-<div class="dropdown">
-<div class="cart-btn">Categories ▾</div>
-<div class="dropdown-menu">
-<div onclick="filterCategory('all')">All Peptides</div>
-<div onclick="filterCategory('Hormonal')">Hormonal</div>
-<div onclick="filterCategory('Neuro')">Neurotransmitter</div>
-<div onclick="filterCategory('Antimicrobial')">Antimicrobial</div>
-<div onclick="filterCategory('Signal')">Signal</div>
-<div onclick="filterCategory('Structural')">Structural</div>
-<div onclick="filterCategory('Therapeutic')">Therapeutic/Synthetic</div>
-<div onclick="filterCategory('Nutritional')">Nutritional/Food</div>
-<div onclick="filterCategory('Research')">Research</div>
-</div>
-</div>
+<div id="userNameMobile"></div>
 </div>
 </header>
 
@@ -87,30 +142,48 @@ header{background:white;height:65px;display:flex;align-items:center;justify-cont
 <h1>Premium Peptides Promo Week</h1>
 <p>Shop trusted peptides for health, fitness, anti-aging, and research purposes at special promo prices!</p>
 </div>
-<img src="https://source.unsplash.com/800x600/?pharmacy,medicine">
+<img src="images/hero.jpg">
 </section>
 
 <div class="container">
+
+<div class="section-title">🔥 Hot Selling Peptides</div>
+<div class="products" id="hotProducts"></div>
+
+<div class="section-title">All Peptides</div>
 <div class="products" id="products"></div>
+
 </div>
 
-<!-- REGISTER MODAL -->
+<!-- PRODUCT MODAL -->
+<div class="product-modal" id="productModal">
+<div class="product-box">
+<img id="pImg">
+<h2 id="pName"></h2>
+<p id="pDesc"></p>
+<p><b>Dose:</b> <span id="pDose"></span></p>
+<p><b>Category:</b> <span id="pCat"></span></p>
+<p class="price" id="pPrice"></p>
+<button onclick="openContact()">Order Now</button>
+<button onclick="closeProduct()">Close</button>
+</div>
+</div>
+
+<!-- REGISTER -->
 <div class="register-modal" id="registerModal">
 <div class="register-box">
 <h2>Register</h2>
-<input type="text" id="regName" placeholder="Full Name" required>
-<input type="email" id="regEmail" placeholder="Email" required>
-<input type="tel" id="regPhone" placeholder="Phone Number" required>
-<input type="text" id="regReferral" placeholder="Referral Code (optional)">
+<input type="text" id="regName" placeholder="Full Name">
+<input type="email" id="regEmail" placeholder="Email">
+<input type="tel" id="regPhone" placeholder="Phone Number">
 <button onclick="registerUser()">Register</button>
 </div>
 </div>
 
-<!-- CONTACT CHOICE MODAL -->
+<!-- CONTACT -->
 <div class="contact-modal" id="contactModal">
 <div class="contact-box">
 <h2>Choose Contact Method</h2>
-<p>⚠️ Payment issue! Confirm order via WhatsApp or Telegram</p>
 <button onclick="contactOrder('whatsapp')">WhatsApp</button>
 <button onclick="contactOrder('telegram')">Telegram</button>
 <button onclick="closeContact()">Cancel</button>
@@ -119,70 +192,133 @@ header{background:white;height:65px;display:flex;align-items:center;justify-cont
 
 <!-- SOCIAL -->
 <div class="social">
-<a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"></a>
-<a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"></a>
-<a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"></a>
+<a href="https://wa.me/17077531496" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+</a>
+<a href="https://instagram.com/NexaPeplab" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+</a>
+<a href="https://t.me/NovaPepLab" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png">
+</a>
 </div>
 
+<!-- TESTIMONIAL -->
+<div class="testimonial" id="testimonialBox"></div>
+
 <script>
-// PRODUCTS
 const products=[
-{id:1,name:"Semaglutide",cat:"Hormonal",desc:"GLP-1 hormone peptide.",dose:"0.25–1 mg/week",price:299,img:"https://source.unsplash.com/400x300/?medicine"},
-{id:2,name:"Tirzepatide",cat:"Hormonal",desc:"Advanced GLP-1 therapy.",dose:"5–15 mg/week",price:389,img:"https://source.unsplash.com/400x300/?pharmacy"},
-{id:3,name:"Liraglutide",cat:"Hormonal",desc:"Daily GLP-1 injection.",dose:"0.6–1.8 mg/day",price:279,img:"https://source.unsplash.com/400x300/?drug"},
-{id:4,name:"Ipamorelin",cat:"Therapeutic",desc:"GH-releasing peptide.",dose:"100–200 mcg/day",price:139,img:"https://source.unsplash.com/400x300/?syringe"},
+{id:1,name:"Semaglutide",cat:"GLP1",hot:true,desc:"GLP-1 receptor agonist peptide used in metabolic research.",dose:"0.25–2.4 mg weekly",price:320,img:"images/semaglutide.jpg"},
+{id:2,name:"Tirzepatide",cat:"GLP1",hot:true,desc:"Dual GIP & GLP-1 receptor agonist.",dose:"2.5–15 mg weekly",price:420,img:"images/tirzepatide.jpg"},
+{id:3,name:"Retatrutide",cat:"GLP1",hot:true,desc:"Triple agonist metabolic peptide.",dose:"Research dosing",price:450,img:"images/retatrutide.jpg"},
+{id:4,name:"BPC-157",cat:"Healing",hot:true,desc:"Healing and recovery peptide.",dose:"250–500 mcg daily",price:120,img:"images/bpc157.jpg"},
+{id:5,name:"TB-500",cat:"Healing",desc:"Tissue regeneration peptide.",dose:"2–5 mg weekly",price:160,img:"images/tb500.jpg"},
+{id:6,name:"Ipamorelin",cat:"GH",desc:"Growth hormone releasing peptide.",dose:"100–300 mcg daily",price:140,img:"images/ipamorelin.jpg"},
+{id:7,name:"CJC-1295 DAC",cat:"GH",desc:"Long-acting GH secretagogue.",dose:"2 mg weekly",price:210,img:"images/cjc1295.jpg"}
 ];
 
-// DISPLAY PRODUCTS
-function display(list){const box=document.getElementById("products"); box.innerHTML=""; list.forEach(p=>{box.innerHTML+=`<div class="card" onclick="selectProduct(${p.id})"><img src="${p.img}"><h4>${p.name}</h4><p>${p.desc}</p><div>Dose: ${p.dose}</div><div class="price">$${p.price}</div></div>`;});}
-display(products);
+function render(){
+display(products,"products");
+display(products.filter(p=>p.hot),"hotProducts");
+}
 
-// FILTER
-function filterCategory(cat){if(cat==="all") display(products); else display(products.filter(p=>p.cat===cat));}
+function display(list,id){
+const box=document.getElementById(id);
+box.innerHTML="";
+list.forEach(p=>{
+box.innerHTML+=`
+<div class="card" onclick="selectProduct(${p.id})">
+<img src="${p.img}">
+<h4>${p.name}</h4>
+<p>${p.desc}</p>
+<div>Dose: ${p.dose}</div>
+<div class="price">$${p.price}</div>
+</div>`;
+});
+}
+render();
 
-// SELECT PRODUCT
 let selected;
+
 function selectProduct(id){
 selected=products.find(p=>p.id===id);
-if(!localStorage.getItem("userName")){openRegister(); return;}
-document.getElementById("contactModal").style.display="flex";
+document.getElementById("pImg").src=selected.img;
+document.getElementById("pName").innerText=selected.name;
+document.getElementById("pDesc").innerText=selected.desc;
+document.getElementById("pDose").innerText=selected.dose;
+document.getElementById("pCat").innerText=selected.cat;
+document.getElementById("pPrice").innerText="$"+selected.price;
+document.getElementById("productModal").style.display="flex";
 }
 
-// REGISTER
+function closeProduct(){document.getElementById("productModal").style.display="none";}
 function openRegister(){document.getElementById("registerModal").style.display="flex";}
-function closeRegister(){document.getElementById("registerModal").style.display="none";}
+function openContact(){document.getElementById("contactModal").style.display="flex";}
+function closeContact(){document.getElementById("contactModal").style.display="none";}
+
 function registerUser(){
 const name=document.getElementById("regName").value;
-const email=document.getElementById("regEmail").value;
-const phone=document.getElementById("regPhone").value;
-const referral=document.getElementById("regReferral").value;
-if(!name||!email||!phone){alert("Please fill all required fields"); return;}
+if(!name)return;
 localStorage.setItem("userName",name);
-localStorage.setItem("userEmail",email);
-localStorage.setItem("userPhone",phone);
-localStorage.setItem("userReferral",referral);
 document.getElementById("userNameDisplay").innerText="Hi, "+name;
 document.getElementById("userNameMobile").innerText="Hi, "+name;
-alert("Registered successfully!");
-closeRegister();
+document.getElementById("registerModal").style.display="none";
 }
 
-// SHOW USER NAME ON LOAD
-if(localStorage.getItem("userName")){
-document.getElementById("userNameDisplay").innerText="Hi, "+localStorage.getItem("userName");
-document.getElementById("userNameMobile").innerText="Hi, "+localStorage.getItem("userName");
-}
-
-// CONTACT CHOICE
-function closeContact(){document.getElementById("contactModal").style.display="none";}
 function contactOrder(service){
-if(!selected) return;
-const msg=`⚠️ Payment Issue! Order via ${service}\nProduct: ${selected.name}\nDose: ${selected.dose}\nPrice: $${selected.price}`;
+const msg=`Order Request
+Product: ${selected.name}
+Price: $${selected.price}`;
 const encoded=encodeURIComponent(msg);
-if(service==="whatsapp"){const waNumber="+17077531496"; window.open(`https://wa.me/${waNumber}?text=${encoded}`,"_blank");}
-else{const tgUsername="NovaPepLab"; window.open(`https://t.me/${tgUsername}?text=${encoded}`,"_blank");}
-closeContact();
+if(service==="whatsapp"){
+window.open(`https://wa.me/17077531496?text=${encoded}`);
+}else{
+window.open(`https://t.me/NovaPepLab?text=${encoded}`);
 }
+}
+
+/* TESTIMONIAL SYSTEM */
+
+const names=[
+"Liam","Noah","Oliver","Elijah","James","William","Benjamin","Lucas","Henry","Alexander",
+"Mason","Michael","Ethan","Daniel","Jacob","Logan","Jackson","Levi","Sebastian","Mateo",
+"Jack","Owen","Theodore","Aiden","Samuel","Joseph","John","David","Wyatt","Matthew",
+"Luke","Asher","Carter","Julian","Grayson","Leo","Jayden","Gabriel","Isaac","Lincoln",
+"Anthony","Hudson","Dylan","Ezra","Thomas","Charles","Christopher","Jaxon","Maverick","Josiah",
+"Isaiah","Andrew","Elias","Joshua","Nathan","Caleb","Ryan","Adrian","Miles","Eli",
+"Nolan","Christian","Aaron","Cameron","Ezekiel","Colton","Luca","Landon","Hunter","Jonathan",
+"Santiago","Axel","Easton","Cooper","Jeremiah","Angel","Roman","Connor","Jameson","Robert",
+"Greyson","Jordan","Ian","Carson","Jaxson","Leonardo","Nicholas","Dominic","Austin","Everett",
+"Brooks","Xavier","Kai","Jose","Parker","Adam","Jace","Wesley","Kayden","Silas"
+];
+
+const comments=[
+"Fast delivery and legit products.",
+"Very trustworthy site.",
+"My order arrived quickly.",
+"Customer service was great.",
+"Packaging was very professional.",
+"Highly recommend this store.",
+"Great quality peptides.",
+"Smooth ordering process.",
+"Delivery was faster than expected.",
+"Reliable and secure service."
+];
+
+function showTestimonial(){
+const name=names[Math.floor(Math.random()*names.length)];
+const comment=comments[Math.floor(Math.random()*comments.length)];
+
+const box=document.getElementById("testimonialBox");
+box.innerHTML=`<strong>${name}</strong>${comment}`;
+box.style.display="block";
+
+setTimeout(()=>{box.style.display="none";},7000);
+}
+
+setInterval(showTestimonial,30000);
+setTimeout(showTestimonial,8000);
 </script>
+
 </body>
 </html>
