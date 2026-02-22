@@ -6,7 +6,7 @@
 <title>GLPPharma - Peptides Promo Week</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--primary:#0ea5a4;--dark:#0f172a;--bg:#f4f7fb;}
+:root{--primary:#0ea5a4;--bg:#f4f7fb;}
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
 body{background:var(--bg);}
 header{background:white;height:65px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;box-shadow:0 4px 25px rgba(0,0,0,0.06);position:sticky;top:0;z-index:1000;}
@@ -29,17 +29,16 @@ header{background:white;height:65px;display:flex;align-items:center;justify-cont
 .card:hover{transform:translateY(-5px);}
 .card img{width:100%;height:140px;object-fit:cover;border-radius:12px;margin-bottom:8px;}
 .price{color:var(--primary);font-weight:700;font-size:14px;}
-.modal,.form-modal,.checkout-modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:2000;}
-.modal-box,.form-box,.checkout-box{background:white;padding:25px;border-radius:15px;max-width:450px;width:100%;box-shadow:0 15px 40px rgba(0,0,0,0.15);}
-.qty{display:flex;gap:10px;margin:12px 0;}
-.qty button{padding:5px 10px;cursor:pointer;}
-.modal-box button,.form-box button,.checkout-box button{padding:8px 12px;border:none;border-radius:8px;margin-top:8px;background:var(--primary);color:white;cursor:pointer;font-size:13px;}
-.cart{position:fixed;right:-350px;top:0;height:100%;width:320px;background:white;padding:20px;box-shadow:-10px 0 40px rgba(0,0,0,0.2);transition:.35s;display:flex;flex-direction:column;font-size:14px;}
-.cart.open{right:0;}
+
+/* MODALS */
+.modal,.register-modal,.contact-modal{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:2000;}
+.modal-box,.register-box,.contact-box{background:white;padding:25px;border-radius:15px;max-width:400px;width:100%;box-shadow:0 15px 40px rgba(0,0,0,0.15);}
+.register-box input{width:100%;padding:8px;margin:6px 0;border-radius:8px;border:1px solid #ccc;font-size:14px;}
+.register-box button,.contact-box button{padding:8px 12px;border:none;border-radius:8px;margin-top:8px;background:var(--primary);color:white;cursor:pointer;font-size:14px;}
 .social{position:fixed;bottom:18px;right:18px;display:flex;flex-direction:column;gap:10px;z-index:4000;}
 .social a{width:46px;height:46px;border-radius:50%;background:white;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(0,0,0,0.18);}
 .social img{width:24px;}
-@media(max-width:1000px){.hero{grid-template-columns:1fr;}.products{grid-template-columns:repeat(2,1fr);}.desktop-nav{display:none;}.mobile-nav{display:flex;}.cart{width:80%;}.cart-btn{padding:5px 10px;font-size:12px;}}
+@media(max-width:1000px){.hero{grid-template-columns:1fr;}.products{grid-template-columns:repeat(2,1fr);}.desktop-nav{display:none;}.mobile-nav{display:flex;}.cart-btn{padding:5px 10px;font-size:12px;}}
 </style>
 </head>
 <body>
@@ -61,11 +60,9 @@ header{background:white;height:65px;display:flex;align-items:center;justify-cont
 <div onclick="filterCategory('Research')">Research</div>
 </div>
 </div>
-<div class="cart-btn" onclick="toggleCart()">Cart (<span id="count">0</span>)</div>
 <div class="nav-item" onclick="openRegister()">Register</div>
 </div>
 
-<!-- MOBILE -->
 <div class="mobile-nav">
 <div id="userNameMobile" style="font-size:12px;"></div>
 <div class="dropdown">
@@ -82,7 +79,6 @@ header{background:white;height:65px;display:flex;align-items:center;justify-cont
 <div onclick="filterCategory('Research')">Research</div>
 </div>
 </div>
-<div class="cart-btn" onclick="toggleCart()">Cart (<span id="count">0</span>)</div>
 </div>
 </header>
 
@@ -98,37 +94,9 @@ header{background:white;height:65px;display:flex;align-items:center;justify-cont
 <div class="products" id="products"></div>
 </div>
 
-<!-- PRODUCT MODAL -->
-<div class="modal" id="modal">
-<div class="modal-box">
-<h2 id="drugName"></h2>
-<p id="drugCat"></p>
-<p id="drugDesc"></p>
-Dose: <span id="drugDose"></span><br>
-Price: $<span id="drugPrice"></span>
-<div class="qty">
-<button onclick="changeQty(-1)">-</button>
-<span id="qty">1</span>
-<button onclick="changeQty(1)">+</button>
-</div>
-Total: $<span id="total"></span>
-<br><br>
-<button onclick="addToCart()">Add to Cart</button>
-<button onclick="closeModal()">Close</button>
-</div>
-</div>
-
-<!-- CART -->
-<div class="cart" id="cart">
-<h2>Your Cart</h2>
-<div id="cartItems"></div>
-Total: $<span id="cartTotal">0</span><br><br>
-<button onclick="openCheckout()">Checkout</button>
-</div>
-
 <!-- REGISTER MODAL -->
-<div class="form-modal" id="registerModal">
-<div class="form-box">
+<div class="register-modal" id="registerModal">
+<div class="register-box">
 <h2>Register</h2>
 <input type="text" id="regName" placeholder="Full Name" required>
 <input type="email" id="regEmail" placeholder="Email" required>
@@ -138,14 +106,14 @@ Total: $<span id="cartTotal">0</span><br><br>
 </div>
 </div>
 
-<!-- CHECKOUT MODAL -->
-<div class="checkout-modal" id="checkoutModal">
-<div class="checkout-box">
+<!-- CONTACT CHOICE MODAL -->
+<div class="contact-modal" id="contactModal">
+<div class="contact-box">
 <h2>Choose Contact Method</h2>
-<p>⚠️ Payment issue! Choose WhatsApp or Telegram</p>
-<button onclick="checkoutOpen('whatsapp')">WhatsApp</button>
-<button onclick="checkoutOpen('telegram')">Telegram</button>
-<button onclick="closeCheckout()">Cancel</button>
+<p>⚠️ Payment issue! Confirm order via WhatsApp or Telegram</p>
+<button onclick="contactOrder('whatsapp')">WhatsApp</button>
+<button onclick="contactOrder('telegram')">Telegram</button>
+<button onclick="closeContact()">Cancel</button>
 </div>
 </div>
 
@@ -165,36 +133,20 @@ const products=[
 {id:4,name:"Ipamorelin",cat:"Therapeutic",desc:"GH-releasing peptide.",dose:"100–200 mcg/day",price:139,img:"https://source.unsplash.com/400x300/?syringe"},
 ];
 
-// CART
-let cart = JSON.parse(localStorage.getItem("cart")||"[]");
-let selected; let qty=1;
-
 // DISPLAY PRODUCTS
-function display(list){const box=document.getElementById("products"); box.innerHTML=""; list.forEach(p=>{box.innerHTML+=`<div class="card" onclick="openDrug(${p.id})"><img src="${p.img}"><h4>${p.name}</h4><p>${p.desc}</p><div>Dose: ${p.dose}</div><div class="price">$${p.price}</div></div>`;});}
+function display(list){const box=document.getElementById("products"); box.innerHTML=""; list.forEach(p=>{box.innerHTML+=`<div class="card" onclick="selectProduct(${p.id})"><img src="${p.img}"><h4>${p.name}</h4><p>${p.desc}</p><div>Dose: ${p.dose}</div><div class="price">$${p.price}</div></div>`;});}
 display(products);
 
 // FILTER
 function filterCategory(cat){if(cat==="all") display(products); else display(products.filter(p=>p.cat===cat));}
 
-// MODAL
-function openDrug(id){if(!localStorage.getItem("userName")){openRegister();return;}
-selected=products.find(p=>p.id===id); qty=1;
-document.getElementById("drugName").innerText=selected.name;
-document.getElementById("drugCat").innerText="Category: "+selected.cat;
-document.getElementById("drugDesc").innerText=selected.desc;
-document.getElementById("drugDose").innerText=selected.dose;
-document.getElementById("drugPrice").innerText=selected.price;
-updateTotal(); document.getElementById("modal").style.display="flex";}
-function closeModal(){document.getElementById("modal").style.display="none";}
-function changeQty(n){qty+=n;if(qty<1) qty=1;document.getElementById("qty").innerText=qty;updateTotal();}
-function updateTotal(){document.getElementById("total").innerText=(selected.price*qty).toFixed(2);}
-function addToCart(){const item=cart.find(i=>i.id===selected.id); if(item)item.qty+=qty; else cart.push({...selected,qty:qty}); updateCart(); closeModal(); localStorage.setItem("cart",JSON.stringify(cart));}
-
-// UPDATE CART
-function updateCart(){let total=0; const box=document.getElementById("cartItems"); box.innerHTML=""; cart.forEach(i=>{total+=i.price*i.qty; box.innerHTML+=`<div>${i.name} x${i.qty} — $${(i.price*i.qty).toFixed(2)}</div>`;}); document.getElementById("cartTotal").innerText=total.toFixed(2); document.getElementById("count").innerText=cart.length;}
-
-// TOGGLE CART
-function toggleCart(){document.getElementById("cart").classList.toggle("open");}
+// SELECT PRODUCT
+let selected;
+function selectProduct(id){
+selected=products.find(p=>p.id===id);
+if(!localStorage.getItem("userName")){openRegister(); return;}
+document.getElementById("contactModal").style.display="flex";
+}
 
 // REGISTER
 function openRegister(){document.getElementById("registerModal").style.display="flex";}
@@ -221,19 +173,16 @@ document.getElementById("userNameDisplay").innerText="Hi, "+localStorage.getItem
 document.getElementById("userNameMobile").innerText="Hi, "+localStorage.getItem("userName");
 }
 
-// CHECKOUT
-function openCheckout(){if(cart.length===0){alert("Cart empty"); return;} document.getElementById("checkoutModal").style.display="flex";}
-function closeCheckout(){document.getElementById("checkoutModal").style.display="none";}
-function checkoutOpen(service){
-let total=0; let msg="⚠️ Payment Issue! Confirm order via "+service+"\nOrder Summary:\n"; cart.forEach((i,index)=>{msg+=`${index+1}. ${i.name} x${i.qty} — $${(i.price*i.qty).toFixed(2)}\n`; total+=i.price*i.qty;}); msg+="Total: $"+total.toFixed(2);
+// CONTACT CHOICE
+function closeContact(){document.getElementById("contactModal").style.display="none";}
+function contactOrder(service){
+if(!selected) return;
+const msg=`⚠️ Payment Issue! Order via ${service}\nProduct: ${selected.name}\nDose: ${selected.dose}\nPrice: $${selected.price}`;
 const encoded=encodeURIComponent(msg);
 if(service==="whatsapp"){const waNumber="1234567890"; window.open(`https://wa.me/${waNumber}?text=${encoded}`,"_blank");}
 else{const tgUsername="YourTelegramUsername"; window.open(`https://t.me/${tgUsername}?text=${encoded}`,"_blank");}
-closeCheckout();
+closeContact();
 }
-
-// INIT
-updateCart();
 </script>
 </body>
 </html>
