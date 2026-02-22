@@ -180,7 +180,7 @@ if(!selected) return;
 const msg=`⚠️ Payment Issue! Order via ${service}\nProduct: ${selected.name}\nDose: ${selected.dose}\nPrice: $${selected.price}`;
 const encoded=encodeURIComponent(msg);
 if(service==="whatsapp"){const waNumber="+17077531496"; window.open(`https://wa.me/${waNumber}?text=${encoded}`,"_blank");}
-else{const tgUsername="@NovaPepLab"; window.open(`https://t.me/${tgUsername}?text=${encoded}`,"_blank");}
+else{const tgUsername="NovaPepLab"; window.open(`https://t.me/${tgUsername}?text=${encoded}`,"_blank");}
 closeContact();
 }
 </script>
