@@ -174,7 +174,9 @@ Categories ▾
 </div>
 </div>
 <div class="cart-btn" onclick="toggleCart()">Cart (<span id="count">0</span>)</div>
-</nav><!-- Mobile nav -->
+</nav>
+
+<!-- Mobile nav -->
 <div class="mobile-nav">
 <div class="dropdown">
 <div class="cart-btn">Categories ▾</div>
@@ -250,7 +252,8 @@ const products=[
 {id:9,name:"Argireline",cat:"Therapeutic",desc:"Reduces fine lines and wrinkles.",dose:"5–10 mg/day",price:74,img:"https://source.unsplash.com/400x300/?cosmetics"},
 {id:10,name:"Defensins",cat:"Antimicrobial",desc:"Peptide for infection control.",dose:"10–20 mg/day",price:55,img:"https://source.unsplash.com/400x300/?antibiotic"},
 {id:11,name:"Oxytocin",cat:"Neuro",desc:"Neuropeptide for bonding and social behavior.",dose:"10–20 IU/day",price:79,img:"https://source.unsplash.com/400x300/?hormone"},
-{id:12,name:"Insulin",cat:"Hormonal",desc:"Regulates blood sugar levels.",dose:"5–50 IU/day",price:45,img:"https://source.unsplash.com/400x300/?insulin"},{id:13,name:"Collagen Peptides",cat:"Structural",desc:"Supports skin, hair, joints.",dose:"5–10 g/day",price:49,img:"https://source.unsplash.com/400x300/?collagen"},
+{id:12,name:"Insulin",cat:"Hormonal",desc:"Regulates blood sugar levels.",dose:"5–50 IU/day",price:45,img:"https://source.unsplash.com/400x300/?insulin"},
+{id:13,name:"Collagen Peptides",cat:"Structural",desc:"Supports skin, hair, joints.",dose:"5–10 g/day",price:49,img:"https://source.unsplash.com/400x300/?collagen"},
 {id:14,name:"Whey Peptides",cat:"Nutritional",desc:"Muscle recovery and protein support.",dose:"20–30 g/day",price:35,img:"https://source.unsplash.com/400x300/?whey"},
 {id:15,name:"Ghrelin",cat:"Research",desc:"Appetite-regulating peptide.",dose:"50–100 mcg/day",price:99,img:"https://source.unsplash.com/400x300/?lab,peptide"},
 {id:16,name:"Tesamorelin",cat:"Therapeutic",desc:"Fat loss peptide.",dose:"2 mg/day",price:179,img:"https://source.unsplash.com/400x300/?weightloss"},
@@ -327,7 +330,7 @@ const box=document.getElementById("cartItems");
 box.innerHTML="";
 cart.forEach(i=>{
 total+=i.price*i.qty;
-box.innerHTML+=<div>${i.name} x${i.qty} — $${(i.price*i.qty).toFixed(2)}</div>;
+box.innerHTML+=`<div>${i.name} x${i.qty} — $${(i.price*i.qty).toFixed(2)}</div>`;
 });
 document.getElementById("cartTotal").innerText=total.toFixed(2);
 document.getElementById("count").innerText=cart.length;
