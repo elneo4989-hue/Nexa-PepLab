@@ -25,17 +25,6 @@ position:sticky;top:0;z-index:1000;
 .desktop-nav{display:flex;align-items:center;gap:18px;font-size:14px;}
 .nav-item{cursor:pointer;font-weight:500;}
 
-.dropdown{position:relative;}
-.dropdown-menu{
-position:absolute;top:35px;left:0;background:white;
-padding:12px;border-radius:12px;
-box-shadow:0 15px 40px rgba(0,0,0,0.15);
-display:none;flex-direction:column;gap:8px;min-width:180px;
-}
-.dropdown:hover .dropdown-menu{display:flex;}
-.dropdown-menu div{padding:6px;border-radius:8px;cursor:pointer;}
-.dropdown-menu div:hover{background:#ecfeff;}
-
 .hero{
 display:grid;grid-template-columns:1fr 1fr;
 gap:30px;padding:40px 5%;align-items:center;
@@ -74,15 +63,18 @@ max-width:520px;width:92%;
 box-shadow:0 15px 40px rgba(0,0,0,0.15);
 }
 
-.product-box img{
-width:100%;height:220px;object-fit:cover;border-radius:12px;margin-bottom:10px;
+input{
+width:100%;
+padding:10px;
+margin-top:10px;
+border-radius:8px;
+border:1px solid #ddd;
 }
 
 button{
-padding:8px 12px;border:none;border-radius:8px;margin-top:8px;
+padding:10px 14px;border:none;border-radius:8px;margin-top:10px;
 background:var(--primary);color:white;cursor:pointer;
 }
-
 /* SOCIAL */
 .social{
 position:fixed;
@@ -103,27 +95,18 @@ box-shadow:0 8px 20px rgba(0,0,0,0.18);
 
 .social img{width:24px;}
 
-/* TESTIMONIAL POPUP FIXED FOR ANDROID EDGES */
 .testimonial{
 position:fixed;
 bottom:110px;
 left:12px;
 max-width:260px;
-width:calc(100% - 24px);
 background:white;
-padding:14px 16px;
+padding:14px;
 border-radius:12px;
 box-shadow:0 10px 25px rgba(0,0,0,0.18);
 font-size:13px;
 display:none;
-margin:8px;
 z-index:5000;
-}
-
-.testimonial strong{
-display:block;
-font-weight:600;
-margin-bottom:4px;
 }
 
 @media(max-width:1000px){
@@ -141,18 +124,6 @@ margin-bottom:4px;
 
 <div class="desktop-nav">
 <div id="userNameDisplay"></div>
-
-<div class="dropdown nav-item">Categories ▾
-<div class="dropdown-menu">
-<div onclick="filterCategory('all')">All Peptides</div>
-<div onclick="filterCategory('GLP1')">GLP-1</div>
-<div onclick="filterCategory('FatLoss')">Fat Loss</div>
-<div onclick="filterCategory('Healing')">Healing</div>
-<div onclick="filterCategory('GH')">Growth Hormone</div>
-<div onclick="filterCategory('Research')">Research</div>
-</div>
-</div>
-
 <div class="nav-item" onclick="openRegister()">Register</div>
 </div>
 </header>
@@ -173,6 +144,7 @@ margin-bottom:4px;
 <div class="products" id="products"></div>
 </div>
 
+<!-- PRODUCT MODAL -->
 <div class="product-modal" id="productModal">
 <div class="product-box">
 <img id="pImg">
@@ -186,21 +158,32 @@ margin-bottom:4px;
 </div>
 </div>
 
+<!-- REGISTER -->
+<div class="register-modal" id="registerModal">
+<div class="register-box">
+<h2>Create Account</h2>
+<input id="regName" placeholder="Full Name" required>
+<input id="regEmail" placeholder="Email" required>
+<input id="regPhone" placeholder="Phone Number" required>
+<input id="regReferral" placeholder="Referral Code (optional)">
+<button onclick="registerUser()">Register</button>
+<button onclick="closeRegister()">Cancel</button>
+</div>
+</div>
+
+<!-- CONTACT -->
 <div class="contact-modal" id="contactModal">
 <div class="contact-box">
 <h2>Choose Contact Method</h2>
-
 <p style="margin-top:8px;line-height:1.5;">
 ⚠️ <b>Temporary Payment Notice</b><br>
 We are currently experiencing an issue with our online payment system.  
 It will be fixed very soon. In the meantime, you can proceed with your order by sending your full order details to our support team via WhatsApp or Telegram.  
 Please select one of the options below. 💬
 </p>
-
-<button onclick="contactOrder('whatsapp')">📱 Order via WhatsApp</button>
+<button onclick="contactOrder('whatsapp')">📱Order via WhatsApp</button>
 <button onclick="contactOrder('telegram')">✈️ Order via Telegram</button>
 <button onclick="closeContact()">Cancel</button>
-
 </div>
 </div>
 
@@ -215,7 +198,7 @@ Please select one of the options below. 💬
 <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png">
 </a>
 </div>
-
+  
 <div class="testimonial" id="testimonialBox"></div>
 
 <script>
@@ -261,6 +244,7 @@ box.innerHTML+=`
 
 let selected;
 
+/* SELECT PRODUCT */
 function selectProduct(id){
 selected=products.find(p=>p.id===id);
 pImg.src=selected.img;
@@ -276,9 +260,82 @@ function closeProduct(){productModal.style.display="none";}
 function openContact(){contactModal.style.display="flex";}
 function closeContact(){contactModal.style.display="none";}
 
-/* 100 FULL NAMES */
-const names=[
-"James Walker","Daniel Carter","Michael Bennett","Lucas Turner","Noah Foster","Ethan Collins","Liam Parker","Mason Cooper","Logan Reed","Jacob Hayes",
+/* REGISTER */
+function openRegister(){registerModal.style.display="flex";}
+function closeRegister(){registerModal.style.display="none";}
+
+function registerUser(){
+const name=regName.value;
+const email=regEmail.value;
+const phone=regPhone.value;
+const referral=regReferral.value;
+
+if(!name || !email || !phone){
+alert("Fill all required fields");
+return;
+}
+
+localStorage.setItem("userName",name);
+localStorage.setItem("userEmail",email);
+localStorage.setItem("userPhone",phone);
+
+/* SEND TO EMAIL */
+fetch("https://formsubmit.co/YOUR_EMAIL_HERE",{
+method:"POST",
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({
+name:name,
+email:email,
+phone:phone,
+referral:referral,
+site:"Nexa Peplab"
+})
+});
+
+userNameDisplay.innerText="Hi, "+name;
+alert("Registration successful");
+closeRegister();
+}
+
+/* ORDER FUNCTION */
+function contactOrder(type){
+
+const name=localStorage.getItem("userName") || "Not registered";
+const email=localStorage.getItem("userEmail") || "";
+const phone=localStorage.getItem("userPhone") || "";
+
+const message =
+`Hello Nexa Peplab,
+
+I want to place an order but I saw the notice about online payment issue.
+
+Order Details:
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+
+Product: ${selected.name}
+Description: ${selected.desc}
+Dose: ${selected.dose}
+Category: ${selected.cat}
+Price: $${selected.price}
+
+Please assist me with payment.`;
+
+const encoded=encodeURIComponent(message);
+
+if(type==="whatsapp"){
+window.open(`https://wa.me/17077531496?text=${encoded}`,"_blank");
+}
+
+if(type==="telegram"){
+window.open(`https://t.me/NovaPepLab?text=${encoded}`,"_blank");
+}
+
+}
+
+/* TESTIMONIALS */
+const names=["James Walker","Daniel Carter","Michael Bennett","Lucas Turner","Noah Foster","Ethan Collins","Liam Parker","Mason Cooper","Logan Reed","Jacob Hayes",
 "Benjamin Brooks","Henry Powell","Sebastian Ward","Jack Simmons","Owen Hughes","Wyatt Griffin","Levi Price","Asher Long","Julian Ross","Hudson Diaz",
 "Gabriel Ortiz","Samuel Jenkins","Carter Shaw","Isaac Freeman","Anthony Gardner","Dylan Stephens","Nathan Silva","Caleb West","Ryan Stone","Andrew Lane",
 "Joshua Carr","Christopher Woods","Isaiah Tucker","Eli Hunter","Jonathan Hicks","Thomas Pierce","Charles Fox","Aaron Marshall","Adrian Warren","Miles Webb",
@@ -287,11 +344,8 @@ const names=[
 "Jose Cruz","Dominic Knight","Nicholas Barrett","Greyson Holland","Jace Bates","Wesley Schmidt","Kayden Sutton","Leonardo Norris","Axel Howard","Hunter Rice",
 "Santiago Delgado","Jeremiah Gibbs","Carson Wolfe","Jaxon Keller","Theo Barker","Maverick Chandler","Tristan Ortega","Blake Newton","Declan Shaw","Ryder Todd",
 "Zachary Walton","Victor Armstrong","Kevin Pratt","Cole Patterson","Finn Sanders","Marcus Bradley","Malachi Cross","Gavin Paul","Damian Holt","Tobias Lowe",
-"Archer Lawson","Reid Alvarez","Spencer Dennis","Rowan Erickson","Jasper Boyd","Oscar Hines","Elliot Osborne","Grant Boone","Bryson Carson","Ronan Drake"
-];
-
-/* 150 UNIQUE COMMENTS */
-const comments = [
+"Archer Lawson","Reid Alvarez","Spencer Dennis","Rowan Erickson","Jasper Boyd","Oscar Hines","Elliot Osborne","Grant Boone","Bryson Carson","Ronan Drake"];
+const comments=[
 "Legit store, my order arrived faster than expected and packaging was perfect.",
 "Second order already, delivery was quick and everything looked professional.",
 "Very trustworthy website, communication and shipping speed were excellent.",
@@ -449,14 +503,12 @@ const comments = [
 "Everything delivered correctly."
 ];
 
-/* POPUP */
 function showTestimonial(){
 const name=names[Math.floor(Math.random()*names.length)];
 const comment=comments[Math.floor(Math.random()*comments.length)];
-const box=document.getElementById("testimonialBox");
-box.innerHTML=`<strong>${name}</strong>${comment}`;
-box.style.display="block";
-setTimeout(()=>{box.style.display="none";},8000);
+testimonialBox.innerHTML=`<strong>${name}</strong> ${comment}`;
+testimonialBox.style.display="block";
+setTimeout(()=>testimonialBox.style.display="none",8000);
 }
 
 setInterval(showTestimonial,30000);
