@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nexa Peplab - Peptides Promo Week</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -11,7 +12,13 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
 body{background:var(--bg);}
 
-header{background:white;height:65px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;box-shadow:0 4px 25px rgba(0,0,0,0.06);position:sticky;top:0;z-index:1000;}
+header{
+background:white;height:65px;display:flex;align-items:center;
+justify-content:space-between;padding:0 5%;
+box-shadow:0 4px 25px rgba(0,0,0,0.06);
+position:sticky;top:0;z-index:1000;
+}
+
 .logo{font-size:22px;font-weight:800;}
 .logo span{color:var(--primary);}
 
@@ -19,25 +26,42 @@ header{background:white;height:65px;display:flex;align-items:center;justify-cont
 .nav-item{cursor:pointer;font-weight:500;}
 
 .dropdown{position:relative;}
-.dropdown-menu{position:absolute;top:35px;left:0;background:white;padding:12px;border-radius:12px;box-shadow:0 15px 40px rgba(0,0,0,0.15);display:none;flex-direction:column;gap:8px;min-width:180px;font-size:14px;}
+.dropdown-menu{
+position:absolute;top:35px;left:0;background:white;
+padding:12px;border-radius:12px;
+box-shadow:0 15px 40px rgba(0,0,0,0.15);
+display:none;flex-direction:column;gap:8px;min-width:180px;
+}
 .dropdown:hover .dropdown-menu{display:flex;}
 .dropdown-menu div{padding:6px;border-radius:8px;cursor:pointer;}
 .dropdown-menu div:hover{background:#ecfeff;}
 
-.mobile-nav{display:none;align-items:center;gap:6px;justify-content:space-between;padding:0 5%;font-size:12px;}
-.cart-btn{background:var(--primary);color:white;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:13px;}
-
-.hero{display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:40px 5%;align-items:center;}
+.hero{
+display:grid;grid-template-columns:1fr 1fr;
+gap:30px;padding:40px 5%;align-items:center;
+}
 .hero img{width:100%;border-radius:18px;}
 
 .container{padding:20px 5% 120px;}
-.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+
+.products{
+display:grid;grid-template-columns:repeat(4,1fr);
+gap:18px;
+}
+
 .section-title{font-size:22px;font-weight:700;margin:20px 0 10px;}
 
-.card{background:white;border-radius:15px;padding:15px;box-shadow:0 15px 40px rgba(0,0,0,0.08);cursor:pointer;transition:.25s;font-size:14px;}
+.card{
+background:white;border-radius:15px;padding:15px;
+box-shadow:0 15px 40px rgba(0,0,0,0.08);
+cursor:pointer;transition:.25s;
+}
 .card:hover{transform:translateY(-5px);}
-.card img{width:100%;height:140px;object-fit:cover;border-radius:12px;margin-bottom:8px;}
-.price{color:var(--primary);font-weight:700;font-size:14px;}
+.card img{
+width:100%;height:140px;object-fit:cover;
+border-radius:12px;margin-bottom:8px;
+}
+.price{color:var(--primary);font-weight:700;}
 
 .product-modal,.register-modal,.contact-modal{
 position:fixed;inset:0;background:rgba(0,0,0,0.5);
@@ -46,15 +70,12 @@ display:none;align-items:center;justify-content:center;z-index:2000;
 
 .product-box,.register-box,.contact-box{
 background:white;padding:25px;border-radius:15px;
-max-width:520px;width:100%;box-shadow:0 15px 40px rgba(0,0,0,0.15);
+max-width:520px;width:92%;
+box-shadow:0 15px 40px rgba(0,0,0,0.15);
 }
 
 .product-box img{
 width:100%;height:220px;object-fit:cover;border-radius:12px;margin-bottom:10px;
-}
-
-.register-box input{
-width:100%;padding:8px;margin:6px 0;border-radius:8px;border:1px solid #ccc;
 }
 
 button{
@@ -62,50 +83,53 @@ padding:8px 12px;border:none;border-radius:8px;margin-top:8px;
 background:var(--primary);color:white;cursor:pointer;
 }
 
-/* SOCIAL BUTTONS */
+/* SOCIAL */
 .social{
-position:fixed;bottom:18px;right:18px;
-display:flex;flex-direction:column;gap:10px;z-index:4000;
+position:fixed;
+bottom:18px;
+right:18px;
+display:flex;
+flex-direction:column;
+gap:10px;
+z-index:4000;
 }
+
 .social a{
-width:46px;height:46px;border-radius:50%;background:white;
+width:46px;height:46px;border-radius:50%;
+background:white;
 display:flex;align-items:center;justify-content:center;
 box-shadow:0 8px 20px rgba(0,0,0,0.18);
 }
+
 .social img{width:24px;}
 
-/* TESTIMONIAL POPUP */
+/* TESTIMONIAL POPUP FIXED FOR ANDROID EDGES */
 .testimonial{
 position:fixed;
-bottom:90px;
-left:18px;
+bottom:110px;
+left:12px;
+max-width:260px;
+width:calc(100% - 24px);
 background:white;
-padding:12px 14px;
+padding:14px 16px;
 border-radius:12px;
-box-shadow:0 10px 25px rgba(0,0,0,0.15);
+box-shadow:0 10px 25px rgba(0,0,0,0.18);
 font-size:13px;
-max-width:240px;
 display:none;
-animation:fadeIn 0.4s ease;
-z-index:4000;
+margin:8px;
+z-index:5000;
 }
 
 .testimonial strong{
 display:block;
 font-weight:600;
-margin-bottom:3px;
-}
-
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(10px);}
-to{opacity:1;transform:translateY(0);}
+margin-bottom:4px;
 }
 
 @media(max-width:1000px){
 .hero{grid-template-columns:1fr;}
 .products{grid-template-columns:repeat(2,1fr);}
 .desktop-nav{display:none;}
-.mobile-nav{display:flex;}
 }
 </style>
 </head>
@@ -116,12 +140,12 @@ to{opacity:1;transform:translateY(0);}
 <div class="logo">Nexa <span>Peplab</span></div>
 
 <div class="desktop-nav">
-<div id="userNameDisplay" class="nav-item"></div>
+<div id="userNameDisplay"></div>
 
 <div class="dropdown nav-item">Categories ▾
 <div class="dropdown-menu">
 <div onclick="filterCategory('all')">All Peptides</div>
-<div onclick="filterCategory('GLP1')">GLP-1 / Metabolic</div>
+<div onclick="filterCategory('GLP1')">GLP-1</div>
 <div onclick="filterCategory('FatLoss')">Fat Loss</div>
 <div onclick="filterCategory('Healing')">Healing</div>
 <div onclick="filterCategory('GH')">Growth Hormone</div>
@@ -131,31 +155,24 @@ to{opacity:1;transform:translateY(0);}
 
 <div class="nav-item" onclick="openRegister()">Register</div>
 </div>
-
-<div class="mobile-nav">
-<div id="userNameMobile"></div>
-</div>
 </header>
 
 <section class="hero">
 <div>
 <h1>Premium Peptides Promo Week</h1>
-<p>Shop trusted peptides for health, fitness, anti-aging, and research purposes at special promo prices!</p>
+<p>Trusted peptides with fast global delivery.</p>
 </div>
 <img src="images/hero.jpg">
 </section>
 
 <div class="container">
-
 <div class="section-title">🔥 Hot Selling Peptides</div>
 <div class="products" id="hotProducts"></div>
 
 <div class="section-title">All Peptides</div>
 <div class="products" id="products"></div>
-
 </div>
 
-<!-- PRODUCT MODAL -->
 <div class="product-modal" id="productModal">
 <div class="product-box">
 <img id="pImg">
@@ -169,28 +186,24 @@ to{opacity:1;transform:translateY(0);}
 </div>
 </div>
 
-<!-- REGISTER -->
-<div class="register-modal" id="registerModal">
-<div class="register-box">
-<h2>Register</h2>
-<input type="text" id="regName" placeholder="Full Name">
-<input type="email" id="regEmail" placeholder="Email">
-<input type="tel" id="regPhone" placeholder="Phone Number">
-<button onclick="registerUser()">Register</button>
-</div>
-</div>
-
-<!-- CONTACT -->
 <div class="contact-modal" id="contactModal">
 <div class="contact-box">
 <h2>Choose Contact Method</h2>
-<button onclick="contactOrder('whatsapp')">WhatsApp</button>
-<button onclick="contactOrder('telegram')">Telegram</button>
+
+<p style="margin-top:8px;line-height:1.5;">
+⚠️ <b>Temporary Payment Notice</b><br>
+We are currently experiencing an issue with our online payment system.  
+It will be fixed very soon. In the meantime, you can proceed with your order by sending your full order details to our support team via WhatsApp or Telegram.  
+Please select one of the options below. 💬
+</p>
+
+<button onclick="contactOrder('whatsapp')">📱 Order via WhatsApp</button>
+<button onclick="contactOrder('telegram')">✈️ Order via Telegram</button>
 <button onclick="closeContact()">Cancel</button>
+
 </div>
 </div>
 
-<!-- SOCIAL -->
 <div class="social">
 <a href="https://wa.me/17077531496" target="_blank">
 <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
@@ -203,24 +216,33 @@ to{opacity:1;transform:translateY(0);}
 </a>
 </div>
 
-<!-- TESTIMONIAL -->
 <div class="testimonial" id="testimonialBox"></div>
 
 <script>
+
+/* PRODUCTS */
 const products=[
-{id:1,name:"Semaglutide",cat:"GLP1",hot:true,desc:"GLP-1 receptor agonist peptide used in metabolic research.",dose:"0.25–2.4 mg weekly",price:320,img:"images/semaglutide.jpg"},
-{id:2,name:"Tirzepatide",cat:"GLP1",hot:true,desc:"Dual GIP & GLP-1 receptor agonist.",dose:"2.5–15 mg weekly",price:420,img:"images/tirzepatide.jpg"},
-{id:3,name:"Retatrutide",cat:"GLP1",hot:true,desc:"Triple agonist metabolic peptide.",dose:"Research dosing",price:450,img:"images/retatrutide.jpg"},
-{id:4,name:"BPC-157",cat:"Healing",hot:true,desc:"Healing and recovery peptide.",dose:"250–500 mcg daily",price:120,img:"images/bpc157.jpg"},
-{id:5,name:"TB-500",cat:"Healing",desc:"Tissue regeneration peptide.",dose:"2–5 mg weekly",price:160,img:"images/tb500.jpg"},
-{id:6,name:"Ipamorelin",cat:"GH",desc:"Growth hormone releasing peptide.",dose:"100–300 mcg daily",price:140,img:"images/ipamorelin.jpg"},
-{id:7,name:"CJC-1295 DAC",cat:"GH",desc:"Long-acting GH secretagogue.",dose:"2 mg weekly",price:210,img:"images/cjc1295.jpg"}
+{id:1,name:"Semaglutide",cat:"GLP1",hot:true,desc:"GLP-1 receptor agonist.",dose:"Weekly",price:320,img:"images/semaglutide.jpg"},
+{id:2,name:"Tirzepatide",cat:"GLP1",hot:true,desc:"Dual GLP-1/GIP peptide.",dose:"Weekly",price:420,img:"images/tirzepatide.jpg"},
+{id:3,name:"Retatrutide",cat:"GLP1",hot:true,desc:"Triple agonist peptide.",dose:"Research",price:450,img:"images/retatrutide.jpg"},
+{id:4,name:"BPC-157",cat:"Healing",hot:true,desc:"Healing peptide.",dose:"Daily",price:120,img:"images/bpc157.jpg"},
+{id:5,name:"TB-500",cat:"Healing",desc:"Recovery peptide.",dose:"Weekly",price:160,img:"images/tb500.jpg"},
+{id:6,name:"Ipamorelin",cat:"GH",desc:"GH peptide.",dose:"Daily",price:140,img:"images/ipamorelin.jpg"},
+{id:7,name:"CJC-1295 DAC",cat:"GH",desc:"Long acting GH.",dose:"Weekly",price:210,img:"images/cjc1295.jpg"},
+{id:8,name:"AOD-9604",cat:"FatLoss",desc:"Fat metabolism peptide.",dose:"Daily",price:170,img:"images/aod9604.jpg"},
+{id:9,name:"HGH Fragment 176-191",cat:"FatLoss",desc:"Fat loss research peptide.",dose:"Daily",price:165,img:"images/hghfrag.jpg"},
+{id:10,name:"Melanotan II",cat:"Research",desc:"Pigmentation peptide.",dose:"Research",price:110,img:"images/melanotan.jpg"},
+{id:11,name:"PT-141",cat:"Research",desc:"Libido peptide.",dose:"Research",price:135,img:"images/pt141.jpg"},
+{id:12,name:"DSIP",cat:"Research",desc:"Sleep peptide.",dose:"Research",price:125,img:"images/dsip.jpg"},
+{id:13,name:"Tesamorelin",cat:"GH",desc:"GH releasing hormone.",dose:"Daily",price:280,img:"images/tesamorelin.jpg"},
+{id:14,name:"Kisspeptin-10",cat:"Research",desc:"Hormonal peptide.",dose:"Research",price:190,img:"images/kisspeptin.jpg"}
 ];
 
 function render(){
 display(products,"products");
 display(products.filter(p=>p.hot),"hotProducts");
 }
+render();
 
 function display(list,id){
 const box=document.getElementById(id);
@@ -236,89 +258,210 @@ box.innerHTML+=`
 </div>`;
 });
 }
-render();
 
 let selected;
 
 function selectProduct(id){
 selected=products.find(p=>p.id===id);
-document.getElementById("pImg").src=selected.img;
-document.getElementById("pName").innerText=selected.name;
-document.getElementById("pDesc").innerText=selected.desc;
-document.getElementById("pDose").innerText=selected.dose;
-document.getElementById("pCat").innerText=selected.cat;
-document.getElementById("pPrice").innerText="$"+selected.price;
-document.getElementById("productModal").style.display="flex";
+pImg.src=selected.img;
+pName.innerText=selected.name;
+pDesc.innerText=selected.desc;
+pDose.innerText=selected.dose;
+pCat.innerText=selected.cat;
+pPrice.innerText="$"+selected.price;
+productModal.style.display="flex";
 }
 
-function closeProduct(){document.getElementById("productModal").style.display="none";}
-function openRegister(){document.getElementById("registerModal").style.display="flex";}
-function openContact(){document.getElementById("contactModal").style.display="flex";}
-function closeContact(){document.getElementById("contactModal").style.display="none";}
+function closeProduct(){productModal.style.display="none";}
+function openContact(){contactModal.style.display="flex";}
+function closeContact(){contactModal.style.display="none";}
 
-function registerUser(){
-const name=document.getElementById("regName").value;
-if(!name)return;
-localStorage.setItem("userName",name);
-document.getElementById("userNameDisplay").innerText="Hi, "+name;
-document.getElementById("userNameMobile").innerText="Hi, "+name;
-document.getElementById("registerModal").style.display="none";
-}
-
-function contactOrder(service){
-const msg=`Order Request
-Product: ${selected.name}
-Price: $${selected.price}`;
-const encoded=encodeURIComponent(msg);
-if(service==="whatsapp"){
-window.open(`https://wa.me/17077531496?text=${encoded}`);
-}else{
-window.open(`https://t.me/NovaPepLab?text=${encoded}`);
-}
-}
-
-/* TESTIMONIAL SYSTEM */
-
+/* 100 FULL NAMES */
 const names=[
-"Liam","Noah","Oliver","Elijah","James","William","Benjamin","Lucas","Henry","Alexander",
-"Mason","Michael","Ethan","Daniel","Jacob","Logan","Jackson","Levi","Sebastian","Mateo",
-"Jack","Owen","Theodore","Aiden","Samuel","Joseph","John","David","Wyatt","Matthew",
-"Luke","Asher","Carter","Julian","Grayson","Leo","Jayden","Gabriel","Isaac","Lincoln",
-"Anthony","Hudson","Dylan","Ezra","Thomas","Charles","Christopher","Jaxon","Maverick","Josiah",
-"Isaiah","Andrew","Elias","Joshua","Nathan","Caleb","Ryan","Adrian","Miles","Eli",
-"Nolan","Christian","Aaron","Cameron","Ezekiel","Colton","Luca","Landon","Hunter","Jonathan",
-"Santiago","Axel","Easton","Cooper","Jeremiah","Angel","Roman","Connor","Jameson","Robert",
-"Greyson","Jordan","Ian","Carson","Jaxson","Leonardo","Nicholas","Dominic","Austin","Everett",
-"Brooks","Xavier","Kai","Jose","Parker","Adam","Jace","Wesley","Kayden","Silas"
+"James Walker","Daniel Carter","Michael Bennett","Lucas Turner","Noah Foster","Ethan Collins","Liam Parker","Mason Cooper","Logan Reed","Jacob Hayes",
+"Benjamin Brooks","Henry Powell","Sebastian Ward","Jack Simmons","Owen Hughes","Wyatt Griffin","Levi Price","Asher Long","Julian Ross","Hudson Diaz",
+"Gabriel Ortiz","Samuel Jenkins","Carter Shaw","Isaac Freeman","Anthony Gardner","Dylan Stephens","Nathan Silva","Caleb West","Ryan Stone","Andrew Lane",
+"Joshua Carr","Christopher Woods","Isaiah Tucker","Eli Hunter","Jonathan Hicks","Thomas Pierce","Charles Fox","Aaron Marshall","Adrian Warren","Miles Webb",
+"Nolan Payne","Christian Walters","Colton Kelley","Luca Dunn","Easton Bowman","Cooper Brady","Angel Beck","Roman Larson","Connor Gill","Robert Doyle",
+"Jordan Hammond","Ian Rhodes","Austin Fletcher","Everett Miles","Brooks Banks","Xavier Vega","Parker Hart","Adam Grant","Silas Bishop","Kai Moreno",
+"Jose Cruz","Dominic Knight","Nicholas Barrett","Greyson Holland","Jace Bates","Wesley Schmidt","Kayden Sutton","Leonardo Norris","Axel Howard","Hunter Rice",
+"Santiago Delgado","Jeremiah Gibbs","Carson Wolfe","Jaxon Keller","Theo Barker","Maverick Chandler","Tristan Ortega","Blake Newton","Declan Shaw","Ryder Todd",
+"Zachary Walton","Victor Armstrong","Kevin Pratt","Cole Patterson","Finn Sanders","Marcus Bradley","Malachi Cross","Gavin Paul","Damian Holt","Tobias Lowe",
+"Archer Lawson","Reid Alvarez","Spencer Dennis","Rowan Erickson","Jasper Boyd","Oscar Hines","Elliot Osborne","Grant Boone","Bryson Carson","Ronan Drake"
 ];
 
-const comments=[
-"Fast delivery and legit products.",
-"Very trustworthy site.",
-"My order arrived quickly.",
-"Customer service was great.",
-"Packaging was very professional.",
-"Highly recommend this store.",
-"Great quality peptides.",
-"Smooth ordering process.",
-"Delivery was faster than expected.",
-"Reliable and secure service."
+/* 150 UNIQUE COMMENTS */
+const comments = [
+"Legit store, my order arrived faster than expected and packaging was perfect.",
+"Second order already, delivery was quick and everything looked professional.",
+"Very trustworthy website, communication and shipping speed were excellent.",
+"Customer support replied fast and helped track my order.",
+"Everything arrived sealed and well packed.",
+"Delivery was faster than I expected honestly.",
+"I was skeptical at first but the service was actually solid.",
+"Ordered twice now, both times smooth process.",
+"Packaging looked very professional.",
+"Definitely ordering again soon.",
+"Shipping updates were accurate and helpful.",
+"Great experience overall.",
+"My package arrived safely and discreetly.",
+"Fast dispatch after payment confirmation.",
+"Product quality looked excellent.",
+"Everything matched the description.",
+"The communication on Telegram was very responsive.",
+"Reliable store from my experience.",
+"Smooth order process and quick response.",
+"Very impressed with delivery speed.",
+"My friend recommended this site and it worked well.",
+"Order arrived earlier than expected.",
+"Professional packaging and labeling.",
+"Website is easy to use.",
+"Trusted vendor in my opinion.",
+"Second purchase went perfectly.",
+"Customer service was polite and helpful.",
+"Shipping time was surprisingly fast.",
+"Everything came exactly as ordered.",
+"Good experience overall.",
+"Really happy with how smooth it was.",
+"Arrived safely with no issues.",
+"Quick confirmation after ordering.",
+"Communication was clear.",
+"Reliable delivery service.",
+"Very satisfied with my purchase.",
+"Everything arrived intact.",
+"Smooth transaction process.",
+"Delivery updates were accurate.",
+"Secure packaging.",
+"Great first experience.",
+"Very professional service.",
+"Product arrived in perfect condition.",
+"Fast response from support.",
+"Happy with my order.",
+"Legitimate service.",
+"Everything worked as expected.",
+"Shipment tracking worked fine.",
+"Arrived quicker than I thought.",
+"Quality packaging.",
+"Good communication from seller.",
+"Delivery process was smooth.",
+"Order confirmed quickly.",
+"Happy with overall experience.",
+"Professional handling.",
+"Prompt responses.",
+"Reliable seller.",
+"Quick shipping.",
+"Accurate order.",
+"Trusted service.",
+"Good support.",
+"Safe packaging.",
+"Fast order processing.",
+"Very satisfied.",
+"Arrived on time.",
+"Everything was correct.",
+"Great packaging quality.",
+"Fast dispatch.",
+"Smooth checkout.",
+"Responsive team.",
+"Helpful support.",
+"Quick delivery.",
+"Good product condition.",
+"Secure shipment.",
+"Nice experience.",
+"Worked perfectly.",
+"Reliable store.",
+"Delivery was quick.",
+"Packaging was clean.",
+"Everything fine.",
+"Trusted purchase.",
+"Support was responsive.",
+"Arrived safely.",
+"Fast turnaround.",
+"Professional handling.",
+"Everything matched order.",
+"Good order tracking.",
+"Very smooth process.",
+"Great vendor.",
+"Shipment arrived safely.",
+"Good first order.",
+"Nice packaging.",
+"Quick shipment.",
+"Trustworthy site.",
+"Solid service.",
+"Everything good.",
+"Delivery confirmed fast.",
+"Accurate tracking.",
+"Safe delivery.",
+"Professional response.",
+"Great experience overall.",
+"Fast confirmation.",
+"Clear communication.",
+"Delivery successful.",
+"Everything looked legit.",
+"Smooth transaction.",
+"Very reliable.",
+"Shipping was quick.",
+"Support helped quickly.",
+"Everything intact.",
+"Good shipping time.",
+"Great service.",
+"Trusted store.",
+"Order received.",
+"All good.",
+"Nice process.",
+"Fast updates.",
+"Good reliability.",
+"Everything arrived.",
+"Professional delivery.",
+"Smooth shipping.",
+"Legit service.",
+"Good experience.",
+"Very smooth order.",
+"Quick service.",
+"Accurate order delivery.",
+"Responsive communication.",
+"Shipment came quickly.",
+"Good packaging.",
+"Secure delivery.",
+"Everything professional.",
+"Fast shipping speed.",
+"Reliable shipping.",
+"Trustworthy service.",
+"Delivery was fast.",
+"Order handled well.",
+"Very good service.",
+"Happy customer here.",
+"Shipment was smooth.",
+"Support responded fast.",
+"Everything worked well.",
+"Good overall experience.",
+"Quick response time.",
+"Smooth order handling.",
+"Delivery was reliable.",
+"Everything perfect.",
+"Service was fast.",
+"Great reliability.",
+"Solid vendor.",
+"Order arrived well.",
+"Quick assistance from support.",
+"Very clean packaging.",
+"Delivery was efficient.",
+"Reliable purchase.",
+"Everything delivered correctly."
 ];
 
+/* POPUP */
 function showTestimonial(){
 const name=names[Math.floor(Math.random()*names.length)];
 const comment=comments[Math.floor(Math.random()*comments.length)];
-
 const box=document.getElementById("testimonialBox");
 box.innerHTML=`<strong>${name}</strong>${comment}`;
 box.style.display="block";
-
-setTimeout(()=>{box.style.display="none";},7000);
+setTimeout(()=>{box.style.display="none";},8000);
 }
 
 setInterval(showTestimonial,30000);
 setTimeout(showTestimonial,8000);
-</script>
 
+</script>
 </body>
 </html>
